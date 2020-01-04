@@ -12,18 +12,86 @@ import autoDoor from "img/autoDoor.png";
 import gasrange from "img/gasrange.png";
 import park from "img/park.png";
 import washingMachine from "img/washingMachine.png";
-import refrigerator from "img/refrigerator.png"
+import refrigerator from "img/refrigerator.png";
 
-import {Heart} from "styled-icons/boxicons-regular/Heart";
- 
-import {ArrowBackIos} from "styled-icons/material/ArrowBackIos";
-import {ArrowForwardIos} from "styled-icons/material/ArrowForwardIos";
+import { Heart } from "styled-icons/boxicons-regular/Heart";
+
+import { ArrowBackIos } from "styled-icons/material/ArrowBackIos";
+import { ArrowForwardIos } from "styled-icons/material/ArrowForwardIos";
 
 import { Person } from "styled-icons/material/Person";
-// import { MdMap } from "react-icons/md";
-import {Wechat2} from "styled-icons/remix-fill/Wechat2";
-import {AddAlert} from "styled-icons/material/AddAlert";
+import { Wechat2 } from "styled-icons/remix-fill/Wechat2";
+import { AddAlert } from "styled-icons/material/AddAlert";
+import { Color, FlexContainer } from "Components/Style";
 
+/*사람 아이콘 */
+const PersonIco = styled(Person)`
+  height: 100px;
+  content: "";
+  margin-right: 10px;
+`;
+/*채팅 아이콘 */
+const ChattingIco = styled(Wechat2)`
+  color: ${Color.deepPink};
+  height: 50px;
+  content: "";
+  margin-left: 15px;
+  cursor: pointer;
+`;
+/*사진 이동 버튼 위치제어를 위한 함수 */
+const checkDirection = direction => {
+  if (direction === "forward") {
+    return css`
+      left: 100%;
+      transform: translate(-60px, -25px);
+    `;
+  } else if (direction === "back") {
+    return css`
+      transform: translateY(-25px);
+    `;
+  }
+};
+
+const ButtonComponent = css`
+  color: whitesmoke;
+
+  cursor: pointer;
+  position: absolute;
+
+  top: 50%;
+
+  ${({ direction }) => checkDirection(direction)}
+
+  ${({ visible }) =>
+    !visible &&
+    css`
+      display: none;
+    `}
+`;
+/*사진 뒤로 가기 아이콘 */
+const BackIco = styled(ArrowBackIos)`
+  ${ButtonComponent};
+  height: 50px;
+  width: 70px;
+  content: "";
+`;
+/*사진 앞으로 가기 아이콘 */
+const ForwardIco = styled(ArrowForwardIos)`
+  ${ButtonComponent};
+  height: 50px;
+  width: 70px;
+  content: "";
+`;
+/*좋아요 아이콘 */
+const HeartIco = styled(Heart)`
+  content: "";
+  width: 25px;
+`;
+/*신고 아이콘 */
+const AlertIco = styled(AddAlert)`
+  content: "";
+  width: 25px;
+`;
 
 export const CFlexComponent = styled.div`
   width: 100%;
@@ -37,7 +105,6 @@ export const CFlexComponent = styled.div`
     css`
       background-color: ${color};
     `}
-
 `;
 
 export const FlexComponent = styled.div`
@@ -47,6 +114,24 @@ export const FlexComponent = styled.div`
   justify-content: center;
   align-items: center;
 `;
+/*옵션과 주변시설 아이콘 */
+const OptionIcon = styled.img`
+  width: 50px;
+  height: 50px;
+  color: pink;
+  margin-right: 15px;
+  border-radius: 5px;
+  border: 1px solid pink;
+  padding: 3px;
+
+  ${({ visible }) =>
+    !visible &&
+    css`
+      display: none;
+    `}
+`;
+
+/*방정보 담는 컨테이너 */
 const InformationComponent = styled.div`
   display: flex;
   flex-direction: column;
@@ -67,18 +152,8 @@ const InformationComponent = styled.div`
     padding: 17px;
     border-radius: 7px;
   }
-
-  .icon img {
-    width: 50px;
-    height: 50px;
-    color: pink;
-    margin-right: 15px;
-    border-radius: 5px;
-    border: 1px solid pink;
-    padding: 3px;
-  }
 `;
-
+/*오른쪽 고정 창 컨테이너 */
 const RightBar = styled.div`
   position: fixed;
   top: 70px;
@@ -86,11 +161,12 @@ const RightBar = styled.div`
   width: 30%;
   border: 1px solid #54d5a6;
   padding-bottom: 10px;
+  margin-right: 20px;
   border-radius: 7px;
   background-color: white;
   box-sizing: border-box;
 `;
-
+/*오른쪽 고정 창 컨테이너 안 버튼 레이어*/
 const ButtonBar = styled.div`
   width: 100%;
   height: 40px;
@@ -130,26 +206,6 @@ const RoomInfo = styled.div`
   }
 `;
 
-const ManagerIcon = styled.div`
-  font-size: 70px;
-  min-width: fit-content;
-  cursor: pointer;
-  margin-right: 20px;
-  margin-left: 10px;
-`;
-
-const ChattingButton = styled.div`
-  font-size: 2rem;
-  color: white;
-  background-color: pink;
-  border-radius: 30px;
-  padding: 2px 7px;
-
-  max-width: fit-content;
-  margin-right: 5px;
-  height: 2rem;
-`;
-
 const ReviewScroll = styled.div`
   height: 400px;
   overflow: scroll;
@@ -182,7 +238,6 @@ const FloorComponent = styled.div`
   z-index: 100;
   width: 100vh;
   height: 70vh;
- 
 `;
 
 export const PictureBoxComponent = styled.div`
@@ -190,110 +245,42 @@ export const PictureBoxComponent = styled.div`
   width: 70%;
   margin: 0 5px;
   margin-bottom: 20px;
-  overflow: hidden;
   position: relative;
 `;
 
-export const ButtonComponent = css`
-  width: fit-content;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  color: whitesmoke;
-
-  font-size: 50px;
-  cursor: pointer;
-
-  position: absolute;
-  z-index: 10;
-  top: 50%;
-`;
-
-const checkDirection = direction => {
-  if (direction === "forward") {
-    return css`
-      left: 100%;
-      transform: translate(-50px, -25px);
-    `;
-  } else if (direction === "back") {
-    return css`
-      transform: translateY(-25px);
-    `;
-  }
-};
-
-export const PictureButtonComponent = styled.div`
-  ${ButtonComponent}
-  ${({ direction }) => checkDirection(direction)}
-  ${({ visible }) =>
-    !visible &&
-    css`
-      display: none;
-    `}
-`;
-
-const moveIcon = keyframes`
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-`;
-
-export const PictureComponent = styled.div`
-  height: 100%;
-
-  ${({ length, current }) =>
-    css`
-      width: ${length * 100}%;
-      transform: translateX(-${(100 * current) / length}%);
-      img {
-        height: 100%;
-        width: ${100 / length}%;
-      }
-    `};
-`;
-
 function Picture({ picture }) {
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(1);
   const length = picture.length;
-  console.log(current);
 
   return (
     <PictureBoxComponent>
-      <PictureButtonComponent
+      <BackIco
         direction="back"
-        visible={current === 0 ? false : true}
+        visible={current === 1 ? false : true}
         onClick={() => {
-          if (current !== 0) setCurrent(current - 1);
+          if (current !== 1) setCurrent(current - 1);
         }}
-      >
-      <ArrowBackIos></ArrowBackIos>
-      </PictureButtonComponent>
-      <PictureComponent current={current} length={length}>
-        {picture.map((p, index) => (
-          <img src={p} alt=""></img>
-        ))}
-      </PictureComponent>
-      <PictureButtonComponent
+      ></BackIco>
+
+      <img
+        style={{ height: "100%", width: "100%" }}
+        src={picture[current]}
+        alt=""
+      ></img>
+
+      <ForwardIco
         direction="forward"
         visible={current === length - 1 ? false : true}
         onClick={() => {
           if (current !== length - 1) setCurrent(current + 1);
         }}
-      >
-       <ArrowForwardIos></ArrowForwardIos>
-      </PictureButtonComponent>
+      ></ForwardIco>
     </PictureBoxComponent>
   );
 }
 
-
 function Detail(props) {
-  const { location, history, match } = props;
+  const { location, history } = props;
 
   if (location.state === undefined) {
     history.push("/");
@@ -303,7 +290,10 @@ function Detail(props) {
     "https://ic.zigbang.com/ic/items/19432793/3.jpg?w=800&h=600&q=70&a=1",
     "https://ic.zigbang.com/ic/items/19432793/3.jpg?w=800&h=600&q=70&a=1",
     "https://ic.zigbang.com/ic/items/19432793/3.jpg?w=800&h=600&q=70&a=1",
+    "https://ic.zigbang.com/ic/items/19432793/3.jpg?w=800&h=600&q=70&a=1",
+    "https://ic.zigbang.com/ic/items/19432793/3.jpg?w=800&h=600&q=70&a=1"
   ];
+
   const Floor = styled.div`
     position: fixed;
     font-size: 50px;
@@ -329,9 +319,7 @@ function Detail(props) {
     <>
       <FloorComponent id="floor"></FloorComponent>
       <div style={{ backgroundColor: "white", display: "flex" }}>
-        <Floor onClick={floor}>
-          {/* <MdMap></MdMap> */}
-        </Floor>
+        <Floor onClick={floor}>{/* <MdMap></MdMap> */}</Floor>
 
         <CFlexComponent style={{ width: "70%", marginTop: "20px" }}>
           {/* picture에 사진url 배열을 넣어주세요 */}
@@ -346,7 +334,9 @@ function Detail(props) {
               <div>건물형태</div>
               <div>{/*structure*/}</div>
               <div>가격</div>
-              <div>{/*price.deposit*/}만원/{/*price.month*/}만원</div>
+              <div>
+                {/*price.deposit*/}만원/{/*price.month*/}만원
+              </div>
               <div>면적</div>
               <div>{/*scale*/}</div>
               <div>관리비</div>
@@ -358,28 +348,34 @@ function Detail(props) {
           <InformationComponent>
             <h3>옵션</h3>
             <div className="icon">
-              <img src={airconditioner} alt=""></img>
-              <img src={autoDoor} alt=""></img>
-              <img src={cctv} alt=""></img>
-              <img src={elevator} alt=""></img>
-              <img src={gasrange} alt=""></img>
-              <img src={park} alt=""></img>
-              <img src={refrigerator} alt=""></img>
-              <img src={washingMachine} alt=""></img>
+              <OptionIcon
+                visible={true}
+                src={airconditioner}
+                alt=""
+              ></OptionIcon>
+              <OptionIcon visible={true} src={autoDoor} alt=""></OptionIcon>
+              <OptionIcon visible={true} src={cctv} alt=""></OptionIcon>
+              <OptionIcon visible={true} src={elevator} alt=""></OptionIcon>
+              <OptionIcon visible={true} src={gasrange} alt=""></OptionIcon>
+              <OptionIcon visible={true} src={park} alt=""></OptionIcon>
+              <OptionIcon visible={true} src={refrigerator} alt=""></OptionIcon>
+              <OptionIcon
+                visible={true}
+                src={washingMachine}
+                alt=""
+              ></OptionIcon>
             </div>
           </InformationComponent>
           <InformationComponent>
             <h3>주변시설</h3>
             <div className="icon">
-              <img src={subway} alt=""></img>
-              <img src={bus} alt=""></img>
+              <OptionIcon visible={true} src={subway} alt=""></OptionIcon>
+              <OptionIcon visible={true} src={bus} alt=""></OptionIcon>
             </div>
           </InformationComponent>
           <InformationComponent>
             <h3>상세설명</h3>
-            <p>
-              {/* description*/}
-            </p>
+            <p>{/* description*/}</p>
           </InformationComponent>
 
           <InformationComponent>
@@ -397,12 +393,15 @@ function Detail(props) {
 
                   <input placeholder="리뷰를 작성하세요"></input>
                 </CFlexComponent>
-                <ChattingButton>
-                  <Wechat2></Wechat2>
-                </ChattingButton>
+
+                <ChattingIco></ChattingIco>
               </FlexComponent>
             </ReviewComponent>
             <ReviewScroll>
+              <ReviewComponent>
+                <h3>{/*리뷰제목 */}</h3>
+                <h5>{/*리뷰글 */}</h5>
+              </ReviewComponent>
               <ReviewComponent>
                 <h3>{/*리뷰제목 */}</h3>
                 <h5>{/*리뷰글 */}</h5>
@@ -411,42 +410,34 @@ function Detail(props) {
           </InformationComponent>
         </CFlexComponent>
 
+        {/* 오른쪽 판매자 정보창 */}
         <right>
           <RightBar>
             <ButtonBar>
               <FlexComponent style={{ justifyContent: "space-around" }}>
                 <Button>
-                  <AddAlert></AddAlert>
+                  <AlertIco></AlertIco>
                 </Button>
-                  <Button>{/*grade */}</Button>
+                <Button>{/*grade */}4.5</Button>
                 <Button>
-                 <Heart></Heart>
+                  <HeartIco></HeartIco>
                 </Button>
               </FlexComponent>
             </ButtonBar>
             <CFlexComponent>
-              <FlexComponent
+              <FlexContainer
                 style={{
                   height: "100px",
 
-                  alignItems: "flex-start",
+                  alignItems: "center",
                   justifyContent: "flex-start"
                 }}
               >
-                <ManagerIcon>
-                  <Person></Person>
-                </ManagerIcon>
-                <CFlexComponent
-                  style={{ alignItems: "flex-start", overflow: "hidden" }}
-                >
-                  <h2>{/*sellerid*/}</h2>
-                </CFlexComponent>
-        
-                <ChattingButton >
-                 <Wechat2></Wechat2>
-                </ChattingButton>
-              </FlexComponent>
-   
+                {/* 사람 아이콘  */}
+                <PersonIco></PersonIco>
+                <h2>{/*sellerid*/}id1234</h2>
+                <ChattingIco></ChattingIco>
+              </FlexContainer>
             </CFlexComponent>
           </RightBar>
         </right>
