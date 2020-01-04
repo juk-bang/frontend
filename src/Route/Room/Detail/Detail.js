@@ -16,9 +16,10 @@ import refrigerator from "img/refrigerator.png"
 
 import { IoIosHeart, IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { AiTwotoneAlert, AiFillWechat } from "react-icons/ai";
-import { GoPerson } from "react-icons/go";
+import { Person } from "styled-icons/material/Person";
 import { MdMap } from "react-icons/md";
-// import FloorPicture from "../img/floorPicture.png";
+import {Wechat2} from "styled-icons/remix-fill/Wechat2";
+
 export const CFlexComponent = styled.div`
   width: 100%;
   height: fit-content;
@@ -427,7 +428,7 @@ function Detail(props) {
                 }}
               >
                 <ManagerIcon>
-                  <GoPerson></GoPerson>
+                  <Person></Person>
                 </ManagerIcon>
                 <CFlexComponent
                   style={{ alignItems: "flex-start", overflow: "hidden" }}
@@ -435,7 +436,7 @@ function Detail(props) {
                   <h2>{/*sellerid*/}</h2>
                 </CFlexComponent>
                 <ChattingButton>
-                  <AiFillWechat></AiFillWechat>
+                  <Wechat2></Wechat2>
                 </ChattingButton>
               </FlexComponent>
    

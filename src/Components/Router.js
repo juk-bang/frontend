@@ -15,7 +15,7 @@ import CommunityNew from "Route/Community/CommunityNew";
 import Login from "Route/User/Login";
 import LogOut from "Route/User/LogOut";
 import CommunityDetail from "Route/Community/CommunityDetail";
-
+import Detail from "Route/Room/Detail/Detail"
 
 export default () => {
   return (
@@ -25,8 +25,8 @@ export default () => {
         <Route path="/" exact component={Home} />
         {/* 방 */}
         <Route path="/roomlist/:univid" exact component={RoomList} />
-        {/* 커뮤니티 */}
         <Route path="/roomlist/:univid/:roomid" exact component={Detail} />
+        {/* 커뮤니티 */}
         <Route path="/community/:univid" exact component={CommunityList} />
         <Route
           path="/community/detail/:univid/:postid"
