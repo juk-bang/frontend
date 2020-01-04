@@ -6,7 +6,7 @@ import { withRouter } from "react-router-dom";
 const LogOut = props => {
   localStorage.setItem("LoggedIn", false);
   localStorage.setItem("userId", "");
-  props.history.goBack();
+  props.history.push("/");
   return <div>LogOut</div>;
 };
 
