@@ -91,6 +91,10 @@ export const Board = styled.div`
   padding: 25px;
   margin: 0 auto;
   font-size: 1rem;
+
+  ${width};
+  ${margin};
+  ${padding};
 `;
 
 const RecCss = css`

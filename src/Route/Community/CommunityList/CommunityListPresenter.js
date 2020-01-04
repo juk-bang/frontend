@@ -9,15 +9,19 @@ import { getCommunityList } from "Components/Api";
 import { BoardList, BoardTitle, GotoDetail } from "./Style";
 import { Button, Board, Color } from "Components/Style";
 
+//메인 함수
 const ListPresenter = ({
   match: {
     params: { univid }
   }
 }) => {
+  //state초기화
+  //List = 게시글 리스트
   const [List, setList] = useState({
     List: ""
   });
 
+  //리스트를 Api에서 불러오는 함수
   const getList = async () => {
     const postsList = await getCommunityList(univid);
     const { data } = postsList;
@@ -25,15 +29,18 @@ const ListPresenter = ({
     List.List = data;
   };
 
+  //리스트를 api에서 처음 랜더할때 부름
   useEffect(() => {
     getList();
   }, []);
 
+  //리스트가 null인지 판단
   let stateNull = true;
   if (List.List !== "") {
     stateNull = false;
   }
 
+  //리턴
   return (
     <div>
       <Header />
