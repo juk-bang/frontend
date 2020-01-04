@@ -1,90 +1,11 @@
-import React, { useEffect } from "react";
-import styled, { css } from "styled-components";
+import React from "react";
 import { Button } from "Components/Style";
 
 import CustomSlider from "./CustomSlider";
 import { CFlexContainer, FlexContainer } from "Components/Style";
-export const FilterComponent = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background-color: white;
-  user-select: none;
-`;
+import { FilterComponent, FilterSelectItem, FilterOptionItem, FilterItem, FilterContainer, SelectComponent } from "Route/Room/style";
+import { CheckBox } from "styled-icons/material";
 
-export const FilterContainer = styled.div`
-  margin-top: 1.5rem;
-  padding-left: 2rem;
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 2.5rem;
-`;
-
-export const FilterItem = styled.div`
-  font-weight: 800;
-  margin-bottom: 0.7rem;
-`;
-
-export const FilterSelectItem = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`;
-
-export const FilterOptionItem = styled.div`
-  border-radius: 20px;
-  border: 1px solid pink;
-  background-color: white;
-  min-width: fit-content;
-  padding-top: 3px;
-  padding: 4px 8px;
-  cursor: pointer;
-  & + & {
-    margin-left: 0.5rem;
-  }
-  :hover {
-    background-color: pink;
-    color: white;
-  }
-`;
-
-export const SelectComponent = styled.select`
-  border: 1px solid pink;
-  width: 100px;
-  display: inline-block;
-  margin-left: 10px;
-  margin-right: 10px;
-  height: 26px;
-`;
-
-const CheckBox = styled.input`
-  display: none;
-
-  + label {
-    display: inline-block;
-    width: max-content;
-    margin-bottom: 10px;
-    cursor: pointer;
-    font-size: 1.3rem;
-  }
-
-  + label:before {
-    display: inline-block;
-    content: "";
-    width: 1.3rem;
-    height: 1.3rem;
-    background-color: pink;
-    border-radius: 2px;
-    margin-right: 5px;
-  }
-
-  &:checked {
-    + label:before {
-      content: "\u2713";
-      color: white;
-      text-align: center;
-    }
-  }
-`;
 
 function MyFilter({ onFilter }) {
   const value = {
