@@ -17,6 +17,12 @@ import LogOut from "Route/User/LogOut";
 import CommunityDetail from "Route/Community/CommunityDetail";
 import Detail from "Route/Room/Detail/Detail";
 import CommunityModify from "Route/Community/CommunityModify";
+import MyPage from "Route/User/MyPage";
+import Favorites from "Route/User/Favorites";
+import Edit from "Route/User/Edit";
+import Secession from "Route/User/Secession";
+import Posts from "Route/User/Posts";
+import SellerHome from "Route/Seller/SellerHome";
 
 export default () => {
   return (
@@ -43,6 +49,13 @@ export default () => {
         {/* 유저 */}
         <Route path="/login" exact component={Login} />
         <Route path="/logout" exact component={LogOut} />
+        <Route path="/userinfo/:userid" exact component={MyPage} />
+        <Route path="/userinfo/favorites/:userid" exact component={Favorites} />
+        <Route path="/userinfo/edit/:userid" exact component={Edit} />
+        <Route path="/userinfo/secession/:userid" exact component={Secession} />
+        <Route path="/userinfo/posts/:userid" exact component={Posts} />
+        {/* 방 판매자 */}
+        <Route path="/manager" exact component={SellerHome} />
       </Switch>
     </Router>
   );
