@@ -36,9 +36,13 @@ const RoomContainer = styled.div`
   margin-top: 20px;
   width: 50%;
   display: grid;
+  padding: 7px;
   grid-template-columns: repeat(4, 1fr);
   div {
     margin: 0 auto;
+  }
+  div:nth-child(2n + 1) {
+    font-weight: 800;
   }
 `;
 const PermissionButton = styled.button`
@@ -121,7 +125,14 @@ const AdminPermissionList = () => {
                   <div>{each.lng}</div>
                   <div>평점</div>
                   <div>{each.grade}</div>
-                  {/* <div>{each.permission}</div> */}
+                  <div>평가여부</div>
+                  <div>
+                    {each.permission == 0
+                      ? (each.permission = "아직 평가안됨")
+                      : each.permission == 1
+                      ? (each.permission = "허가")
+                      : (each.permission = "불허가")}
+                  </div>
                 </RoomContainer>
                 <ButtonContainer>
                   <PermissionButton onClick={handlePermissionClick}>
