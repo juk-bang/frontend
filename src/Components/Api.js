@@ -69,13 +69,12 @@ export const putCommunityComments = async (univid, postid, commentId, body) => {
 //방
 //방 리스트 얻기
 export const getRoomList = async univid => {
-  const List = await allApi.get(`/roomdata/${univid}`);
+  const List = await allApi.get(`/roomlist/${univid}`);
   return List;
 };
 
 //판매자
 //판매자 매물 올리기
-
 export const postManagerRoom = async (body, pictureList, univid, history) => {
   const sellerid = localStorage.getItem("userId");
   const roomid = await allApi.post(`/manager/manageroom/${sellerid}`, body);

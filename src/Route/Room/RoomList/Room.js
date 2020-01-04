@@ -1,8 +1,10 @@
-import React, { useContext, useRef, useEffect } from "react";
-import { Container, Color } from "Components/Style";
-import styled, { css } from "styled-components";
+import React, { useEffect, useState } from "react";
+import { Color } from "Components/Style";
+import styled from "styled-components";
 import { Link } from "react-router-dom";
 import heart from "img/heart.png";
+import { getRoomList } from "Components/Api";
+import { withRouter } from "react-router-dom";
 
 export const RoomList = styled.div`
   display: grid;
@@ -152,43 +154,60 @@ function RoomItem({
   );
 }
 
-function Room() {
-  const roomData = [
-    {
-      roomid: 1,
-      thumbnail:
-        "https://ic.zigbang.com/ic/items/19317951/1.jpg?w=800&h=600&q=70&a=1",
-      structure: "원룸",
-      price: {
-       
-        deposit: 100,
-        month: 50,
-        adminExpnse: 5
-      },
-      floor: 1,
-      scale: "38",
-      grade: 3,
-      distance: "120m"
-    }
-  ];
+//메인함수
+function Room({
+  match: {
+    params: { univid }
+  }
+}) {
+  let [roomListState, setRoomListState] = useState();
+  useEffect(async () => {
+    const RoomList = await getRoomList(univid);
+    roomListState = RoomList.data.room;
+    setRoomListState(roomListState);
+    console.dir(roomListState);
+  }, []);
+  // const roomData = [
+  //   {
+  //     roomid: 1,
+  //     thumbnail:
+  //       "https://ic.zigbang.com/ic/items/19317951/1.jpg?w=800&h=600&q=70&a=1",
+  //     structure: "원룸",
+  //     price: {
+  //       deposit: 100,
+  //       month: 50,
+  //       adminExpnse: 5
+  //     },
+  //     floor: 1,
+  //     scale: "38",
+  //     grade: 3,
+  //     distance: "120m"
+  //   }
+  // ];
 
   return (
     <RoomList>
-      {roomData.map((room, index) => (
-        <RoomItem
-          key={room.id}
-          id={room.id}
-          thumbnail={room.thumbnail}
-          structure={room.structure}
-          price={room.price}
-          floor={room.floor}
-          scale={room.scale}
-          grade={room.grade}
-          distance={room.distance}
-        ></RoomItem>
-      ))}
+      {roomListState !== undefined &&
+        roomListState !== null &&
+        roomListState.map(room => (
+          <RoomItem
+            key={room.id}
+            id={room.id}
+            thumbnail={""}
+            structure={room.structure}
+            price={{
+              month: room.month,
+              deposit: room.deposit,
+              adminExpense: room.adminExpenses
+            }}
+            floor={room.floor}
+            scale={room.scale}
+            grade={room.grade}
+            distance={room.distance}
+          ></RoomItem>
+        ))}
     </RoomList>
   );
 }
 
-export default Room;
+export default withRouter(Room);
