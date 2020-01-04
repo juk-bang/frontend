@@ -26,7 +26,7 @@ export default () => {
           <Logo to="/" />
         </LeftNav>
         <RightNav>
-          <NavItem to={`/room/${Univ}`}>방 리스트</NavItem>
+          <NavItem to={`/roomlist/${Univ}`}>방 리스트</NavItem>
           <NavItem to={`/community/${Univ}`}>커뮤니티</NavItem>
           <NavItem to={"/seller"}>방 판매자 페이지</NavItem>
           {localStorage.getItem("LoggedIn") == "true" ? (
