@@ -25,6 +25,8 @@ import { AddAlert } from "styled-icons/material/AddAlert";
 import { Color, FlexContainer } from "Components/Style";
 import { Container } from "../../../Components/Style";
 import { MapAlt } from "styled-icons/boxicons-regular/MapAlt";
+
+import FloorPlan from "./FloorPlan";
 /*사람 아이콘 */
 const PersonIco = styled(Person)`
   height: 100px;
@@ -302,23 +304,6 @@ function Detail(props) {
     z-index: 1000;
   `;
 
-  const FloorContainer = styled.div`
-    display: none;
-    position: fixed;
-
-    z-index: 10;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-  `;
-
-  const FloorImage = styled.img`
-    position: fixed;
-    display: none;
-    z-index: 11;
-    width: 200px;
-    height: 200px;
-  `;
   function floor() {
     const floors = document.getElementsByClassName("floor");
     console.log(floors[1]);
@@ -337,21 +322,12 @@ function Detail(props) {
     <Container>
       <Header></Header>
       <div style={{ backgroundColor: "white", display: "flex" }}>
-        {/*평면배경*/}
-        <FloorContainer className="floor">
-          {/*평면도 */}
-          <FloorImage
-            visible={true}
-            className="floor"
-            src={autoDoor}
-            alt=""
-          ></FloorImage>
-        </FloorContainer>
-
         {/* 평면도 펼치는 아이콘 */}
         <Floor onClick={floor}>
           <FloorIco></FloorIco>
         </Floor>
+
+        <FloorPlan />
 
         <CFlexComponent style={{ width: "70%", marginTop: "20px" }}>
           {/* picture에 사진url 배열을 넣어주세요 */}

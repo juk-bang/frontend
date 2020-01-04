@@ -3,7 +3,7 @@ import axios from "axios";
 
 //Base Url
 const allApi = axios.create({
-  baseURL: "https://api.codingnome.dev"
+  baseURL: "http://10.16.131.62"
 });
 
 //커뮤니티
