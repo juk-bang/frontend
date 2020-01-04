@@ -29,6 +29,9 @@ export default () => {
           <NavItem to={`/roomlist/${Univ}`}>방 리스트</NavItem>
           <NavItem to={`/community/${Univ}`}>커뮤니티</NavItem>
           <NavItem to={"/manager"}>방 판매자 페이지</NavItem>
+          <NavItem to={`/admin/${localStorage.getItem("userId")}`}>
+            관리자 페이지
+          </NavItem>
           {localStorage.getItem("LoggedIn") == "true" ? (
             <>
               <NavItem to={`/userinfo/edit/${localStorage.getItem("userId")}`}>
