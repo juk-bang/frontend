@@ -1,15 +1,20 @@
 import React, { useState, useRef } from "react";
 
-import styled, { css } from "styled-components";
-import air from "img/airconditioner.png";
-import el from "img/elevator.png";
+import styled, { css, keyframes } from "styled-components";
 
-// import map from "img/map.png";
+import elevator from "img/elevator.png";
 import subway from "img/subway.png";
 import bus from "img/bus.png";
 import cctv from "img/cctv.png";
+import airconditioner from "img/airconditioner.png";
+import autoDoor from "img/autoDoor.png";
 
-import { IoIosHeart } from "react-icons/io";
+import gasrange from "img/gasrange.png";
+import park from "img/park.png";
+import washingMachine from "img/washingMachine.png";
+import refrigerator from "img/refrigerator.png"
+
+import { IoIosHeart, IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
 import { AiTwotoneAlert, AiFillWechat } from "react-icons/ai";
 import { GoPerson } from "react-icons/go";
 import { MdMap } from "react-icons/md";
@@ -173,6 +178,113 @@ const FloorComponent = styled.div`
  
 `;
 
+export const PictureBoxComponent = styled.div`
+  height: 300px;
+  width: 70%;
+  margin: 0 5px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  position: relative;
+`;
+
+export const ButtonComponent = css`
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: whitesmoke;
+
+  font-size: 50px;
+  cursor: pointer;
+
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+`;
+
+const checkDirection = direction => {
+  if (direction === "forward") {
+    return css`
+      left: 100%;
+      transform: translate(-50px, -25px);
+    `;
+  } else if (direction === "back") {
+    return css`
+      transform: translateY(-25px);
+    `;
+  }
+};
+
+export const PictureButtonComponent = styled.div`
+  ${ButtonComponent}
+  ${({ direction }) => checkDirection(direction)}
+  ${({ visible }) =>
+    !visible &&
+    css`
+      display: none;
+    `}
+`;
+
+const moveIcon = keyframes`
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+`;
+
+export const PictureComponent = styled.div`
+  height: 100%;
+
+  ${({ length, current }) =>
+    css`
+      width: ${length * 100}%;
+      transform: translateX(-${(100 * current) / length}%);
+      img {
+        height: 100%;
+        width: ${100 / length}%;
+      }
+    `};
+`;
+
+function Picture({ picture }) {
+  const [current, setCurrent] = useState(0);
+  const length = picture.length;
+  console.log(current);
+
+  return (
+    <PictureBoxComponent>
+      <PictureButtonComponent
+        direction="back"
+        visible={current === 0 ? false : true}
+        onClick={() => {
+          if (current !== 0) setCurrent(current - 1);
+        }}
+      >
+        <IoIosArrowBack></IoIosArrowBack>
+      </PictureButtonComponent>
+      <PictureComponent current={current} length={length}>
+        {picture.map((p, index) => (
+          <img src={p} alt=""></img>
+        ))}
+      </PictureComponent>
+      <PictureButtonComponent
+        direction="forward"
+        visible={current === length - 1 ? false : true}
+        onClick={() => {
+          if (current !== length - 1) setCurrent(current + 1);
+        }}
+      >
+        <IoIosArrowForward></IoIosArrowForward>
+      </PictureButtonComponent>
+    </PictureBoxComponent>
+  );
+}
+
+
 function Detail(props) {
   const { location, history, match } = props;
 
@@ -180,11 +292,10 @@ function Detail(props) {
     history.push("/");
   }
 
-  const { money, distance, area, type, poster } = location.state;
   const picture = [
-    poster,
     "https://ic.zigbang.com/ic/items/19432793/3.jpg?w=800&h=600&q=70&a=1",
-    poster
+    "https://ic.zigbang.com/ic/items/19432793/3.jpg?w=800&h=600&q=70&a=1",
+    "https://ic.zigbang.com/ic/items/19432793/3.jpg?w=800&h=600&q=70&a=1",
   ];
   const Floor = styled.div`
     position: fixed;
@@ -216,32 +327,38 @@ function Detail(props) {
         </Floor>
 
         <CFlexComponent style={{ width: "70%", marginTop: "20px" }}>
-          {/* <Picture picture={picture}></Picture> */}
+          {/* picture에 사진url 배열을 넣어주세요 */}
+          <Picture picture={picture}></Picture>
           <InformationComponent>
             <h3>방정보</h3>
             <RoomInfo>
               <div>주소</div>
-              <div>서울특별시 관악구 신림동</div>
+              <div>{/*address */}</div>
               <div>통학거리</div>
-              <div>100m</div>
+              <div>{/*distance*/}m</div>
               <div>건물형태</div>
-              <div>원룸</div>
+              <div>{/*structure*/}</div>
               <div>가격</div>
-              <div>2000만원/58만원</div>
+              <div>{/*price.deposit*/}만원/{/*price.month*/}만원</div>
               <div>면적</div>
-              <div>20.0m2 (6P) / 12.0m2 (4P)</div>
+              <div>{/*scale*/}</div>
               <div>관리비</div>
-              <div>50만원</div>
+              <div>{/*adminExpenses*/}</div>
               <div>층수</div>
-              <div>2층</div>
+              <div>{/*floor*/}</div>
             </RoomInfo>
           </InformationComponent>
           <InformationComponent>
             <h3>옵션</h3>
             <div className="icon">
-              <img src={air} alt=""></img>
-              <img src={el} alt=""></img>
+              <img src={airconditioner} alt=""></img>
+              <img src={autoDoor} alt=""></img>
               <img src={cctv} alt=""></img>
+              <img src={elevator} alt=""></img>
+              <img src={gasrange} alt=""></img>
+              <img src={park} alt=""></img>
+              <img src={refrigerator} alt=""></img>
+              <img src={washingMachine} alt=""></img>
             </div>
           </InformationComponent>
           <InformationComponent>
@@ -249,31 +366,19 @@ function Detail(props) {
             <div className="icon">
               <img src={subway} alt=""></img>
               <img src={bus} alt=""></img>
-
             </div>
           </InformationComponent>
           <InformationComponent>
             <h3>상세설명</h3>
             <p>
-              "제주도로 직장을 옮기게 되어 방 내놓습니다. <br></br>
-              1. 이쁘게 인테리어 되어있는 복층 원룸입니다. <br></br> 2. 복층에
-              열선이 깔려있어서 겨울에도 따뜻합니다. <br></br>3. 큰 길 바로
-              옆이고 바로 앞에 버스정류장이 있습니다. <br></br>4. 건물 바로
-              뒤로는 놀이터와 어린이집이 있습니다. <br></br>5. 건물 입구 및 복도
-              층마다 cctv가 있습니다. <br></br>6. 신대방역까지는 걸어서는 10분
-              정도 걸립니다. 버스타면 신림역 신대방역 5분 이내 도착. <br></br>{" "}
-              7. 주변 까페, 식당, 다이소, 병원, 헬스장, 편의점이 3분 거리에
-              있습니다.
-              <br></br> 8. 관리실에 필요한 사항 말씀해주시면 바로바로
-              조치해주십니다. - 좋은 분이 좋은 곳에 사셨으면 좋겠습니다.
-              감사합니다."
+              {/* description*/}
             </p>
           </InformationComponent>
 
           <InformationComponent>
             <h3>위치정보</h3>
 
-            {/* <img src={map} alt="" width="100%"></img> */}
+            {/* 지도 넣기 */}
           </InformationComponent>
 
           <InformationComponent>
@@ -292,32 +397,8 @@ function Detail(props) {
             </ReviewComponent>
             <ReviewScroll>
               <ReviewComponent>
-                <h3>여기 좋아여</h3>
-                <h5>내부시설이 끝내줍니당</h5>
-              </ReviewComponent>
-              <ReviewComponent>
-                <h3>여기 좋아여</h3>
-                <h5>내부시설이 끝내줍니당</h5>
-              </ReviewComponent>
-              <ReviewComponent>
-                <h3>여기 좋아여</h3>
-                <h5>내부시설이 끝내줍니당</h5>
-              </ReviewComponent>
-              <ReviewComponent>
-                <h3>여기 좋아여</h3>
-                <h5>내부시설이 끝내줍니당</h5>
-              </ReviewComponent>
-              <ReviewComponent>
-                <h3>여기 좋아여</h3>
-                <h5>내부시설이 끝내줍니당</h5>
-              </ReviewComponent>
-              <ReviewComponent>
-                <h3>여기 좋아여</h3>
-                <h5>내부시설이 끝내줍니당</h5>
-              </ReviewComponent>
-              <ReviewComponent>
-                <h3>여기 좋아여</h3>
-                <h5>내부시설이 끝내줍니당</h5>
+                <h3>{/*리뷰제목 */}</h3>
+                <h5>{/*리뷰글 */}</h5>
               </ReviewComponent>
             </ReviewScroll>
           </InformationComponent>
@@ -330,7 +411,7 @@ function Detail(props) {
                 <Button>
                   <AiTwotoneAlert></AiTwotoneAlert>
                 </Button>
-                <Button>5.2 </Button>
+                  <Button>{/*grade */}</Button>
                 <Button>
                   <IoIosHeart></IoIosHeart>
                 </Button>
@@ -351,14 +432,13 @@ function Detail(props) {
                 <CFlexComponent
                   style={{ alignItems: "flex-start", overflow: "hidden" }}
                 >
-                  <h2>홍길동</h2>
-                  <div>올린매물 : 10개</div>
+                  <h2>{/*sellerid*/}</h2>
                 </CFlexComponent>
                 <ChattingButton>
                   <AiFillWechat></AiFillWechat>
                 </ChattingButton>
               </FlexComponent>
-              계약일자 : xx/xx/xx
+   
             </CFlexComponent>
           </RightBar>
         </right>
