@@ -15,6 +15,7 @@ import {
   RoomList
 } from "../../Room/RoomList/Room";
 import Heart from "img/heart.png";
+import { postFavorites } from "../../../Components/Api";
 
 //styled-Components
 const FavoriteContainer = styled.div`
@@ -61,6 +62,7 @@ function RoomItem({
     }
     return tthousand;
   };
+ 
 
   price.deposit = changePrice(price.deposit);
 
@@ -85,7 +87,7 @@ function RoomItem({
       <RoomAreaComponent>
         {scale}m<sup>2</sup>/{floor}층
       </RoomAreaComponent>
-      <img src={Heart} alt="heart"></img>
+      <img  src={Heart} alt="heart"></img>
     </RoomItemComponent>
   );
 }
@@ -93,66 +95,6 @@ function RoomItem({
 //메인함수
 const Favorites = () => {
   const roomData = [
-    {
-      roomid: 1,
-      thumbnail:
-        "https://ic.zigbang.com/ic/items/19317951/1.jpg?w=800&h=600&q=70&a=1",
-      structure: "원룸",
-      price: {
-        deposit: 100,
-        month: 50,
-        adminExpnse: 5
-      },
-      floor: 1,
-      scale: "38",
-      grade: 3,
-      distance: "120m"
-    },
-    {
-      roomid: 1,
-      thumbnail:
-        "https://ic.zigbang.com/ic/items/19317951/1.jpg?w=800&h=600&q=70&a=1",
-      structure: "원룸",
-      price: {
-        deposit: 100,
-        month: 50,
-        adminExpnse: 5
-      },
-      floor: 1,
-      scale: "38",
-      grade: 3,
-      distance: "120m"
-    },
-    {
-      roomid: 1,
-      thumbnail:
-        "https://ic.zigbang.com/ic/items/19317951/1.jpg?w=800&h=600&q=70&a=1",
-      structure: "원룸",
-      price: {
-        deposit: 100,
-        month: 50,
-        adminExpnse: 5
-      },
-      floor: 1,
-      scale: "38",
-      grade: 3,
-      distance: "120m"
-    },
-    {
-      roomid: 1,
-      thumbnail:
-        "https://ic.zigbang.com/ic/items/19317951/1.jpg?w=800&h=600&q=70&a=1",
-      structure: "원룸",
-      price: {
-        deposit: 100,
-        month: 50,
-        adminExpnse: 5
-      },
-      floor: 1,
-      scale: "38",
-      grade: 3,
-      distance: "120m"
-    },
     {
       roomid: 1,
       thumbnail:

@@ -122,3 +122,7 @@ export const getMyCommunityList = async userid => {
   const List = await allApi.get(`/userinfo/posts/${userid}`);
   return List;
 };
+
+export const postFavorites = async (univid, roomid, userid) => {
+  await allApi.post(`/userinfo/favorites/${univid}/${roomid}/${userid}`);
+};
