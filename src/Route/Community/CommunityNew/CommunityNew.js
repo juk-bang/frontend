@@ -75,7 +75,8 @@ const CommunityNew = ({
   const handleSubmitForm = async e => {
     e.preventDefault();
     //body를 json으로 바꿈
-    const body = JSON.stringify(editorState);
+    const content = convertToRaw(editorState.getCurrentContent());
+    const body = JSON.stringify(content);
     await postCommunityPost(univid, TitleState, body);
     await history.push(`/community/${univid}`);
   };
