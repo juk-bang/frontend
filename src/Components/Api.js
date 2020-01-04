@@ -15,11 +15,8 @@ export const getPostsList = async (univid, postid) => {
 };
 
 //
-export const getCommunityList = async (univid, setError) => {
-  setError(false);
-  const List = await allApi.get(`/Community/${univid}`).catch(function(error) {
-    setError(true);
-  });
+export const getCommunityList = async univid => {
+  const List = await allApi.get(`/Community/${univid}`);
   return List;
 };
 

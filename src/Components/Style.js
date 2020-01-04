@@ -71,7 +71,7 @@ const container = css`
   width: 100%;
   ${margin};
   ${padding};
-`
+`;
 export const Container = styled.div`
   ${container}
 `;
@@ -83,20 +83,14 @@ export const FlexContainer = styled.div`
 export const CFlexContainer = styled.div`
   ${container}
   display : flex;
-  flex-direction : column;
+  flex-direction: column;
 `;
-
-
 
 export const Board = styled.div`
   width: 70%;
   padding: 25px;
   margin: 0 auto;
   font-size: 1rem;
-
-  ${width};
-  ${margin};
-  ${padding};
 `;
 
 const RecCss = css`
@@ -118,8 +112,7 @@ const RadiusButtonCss = css`
 `;
 
 export const Buttoncss = css`
-
-  color : white;
+  color: white;
   background-color: pink;
   border: 2px solid;
   :hover {
