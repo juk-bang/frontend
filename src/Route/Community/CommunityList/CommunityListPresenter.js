@@ -64,7 +64,9 @@ const ListPresenter = ({
             ? ""
             : List.List.map((list, index) => (
                 <>
-                  <GotoDetail href={`/detail/${list.univid}/${list.id}`}>
+                  <GotoDetail
+                    href={`/community/detail/${list.univid}/${list.id}`}
+                  >
                     {list.title}
                   </GotoDetail>
                   <div>{list.writer}</div>
