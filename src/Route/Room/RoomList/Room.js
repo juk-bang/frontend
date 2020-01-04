@@ -125,12 +125,12 @@ function RoomItem({
   };
 
   price.deposit = changePrice(price.deposit);
-  console.log(window.innerHeight);
+
   return (
     <RoomItemComponent
       className="room"
       to={{
-        pathname: `/room/${id}`,
+        pathname: `1/1`,
         state: {}
       }}
     >

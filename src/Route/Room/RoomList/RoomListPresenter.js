@@ -1,13 +1,20 @@
 import React, { useEffect, useState, useRef } from "react";
-import Header from "Components/Header";
 import { getRoomList } from "Components/Api";
 import { withRouter } from "react-router-dom";
-import { Container, Board, FlexContainer } from "Components/Style";
 
-import MyFilter from "../Filter/MyFilter";
-import Room from "./Room";
+/*전역 네비게이션 바 */
+import Header from "Components/Header";
+/*서브 네비게이션 바 */
 import Navigation from "./Navigation";
-import RoomListComponent from "../style";
+/* 필터 창 */
+import MyFilter from "./Filter/MyFilter";
+/*룸리스트 창*/
+import Room from "./Room";
+
+/*스타일 관련 라이브러리 */
+import {RoomListComponent} from "../style";
+import { Container, Board, FlexContainer} from "Components/Style";
+
 
 const RoomListPresenter = ({
   match: {
