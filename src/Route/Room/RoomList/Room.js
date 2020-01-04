@@ -161,11 +161,15 @@ function Room({
   }
 }) {
   let [roomListState, setRoomListState] = useState();
-  useEffect(async () => {
-    const RoomList = await getRoomList(univid);
-    roomListState = RoomList.data.room;
-    setRoomListState(roomListState);
-    console.dir(roomListState);
+
+  useEffect(() => {
+    const usesEffect = async () => {
+      const RoomList = await getRoomList(univid);
+      roomListState = RoomList.data.room;
+      setRoomListState(roomListState);
+      console.dir(roomListState);
+    };
+    usesEffect();
   }, []);
   // const roomData = [
   //   {

@@ -109,3 +109,8 @@ export const deleteAdminPermission = async (univid, roomid) => {
   console.log(univid, roomid);
   await allApi.delete(`/admin/permissionroom/${univid}/${roomid}`);
 };
+//신고 리스트 받기
+export const getAdminReportList = async univid => {
+  const List = await allApi.get(`/admin/report/${univid}`);
+  return List;
+};
