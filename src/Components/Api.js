@@ -93,3 +93,19 @@ export const postManagerRoom = async (body, pictureList, univid, history) => {
   });
   await history.push("/manager");
 };
+
+//관리자
+//관리자 퍼미션 매물 리스트
+export const getAdminPermissionList = async univid => {
+  const List = await allApi.get(`/admin/permissionroom/${univid}`);
+  return List;
+};
+//허가
+export const postAdminPermission = async (univid, roomid) => {
+  await allApi.post(`/admin/permissionroom/${univid}/${roomid}`);
+};
+//허가안함
+export const deleteAdminPermission = async (univid, roomid) => {
+  console.log(univid, roomid);
+  await allApi.delete(`/admin/permissionroom/${univid}/${roomid}`);
+};
