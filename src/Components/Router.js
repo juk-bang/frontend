@@ -20,6 +20,8 @@ import CommunityModify from "Route/Community/CommunityModify";
 import MyPage from "Route/User/MyPage";
 import Favorites from "Route/User/Favorites";
 import Edit from "Route/User/Edit";
+import Chatting from "Route/User/Chatting/Chatting";
+import ChattingDetail from "Route/User/Chatting/ChattingDetail";
 import Secession from "Route/User/Secession";
 import Posts from "Route/User/Posts";
 import SellerHome from "Route/Seller/SellerHome";
