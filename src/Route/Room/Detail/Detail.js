@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 
 import styled, { css, keyframes } from "styled-components";
-
+import Header from "Components/Header";
 import elevator from "img/elevator.png";
 import subway from "img/subway.png";
 import bus from "img/bus.png";
@@ -23,7 +23,8 @@ import { Person } from "styled-icons/material/Person";
 import { Wechat2 } from "styled-icons/remix-fill/Wechat2";
 import { AddAlert } from "styled-icons/material/AddAlert";
 import { Color, FlexContainer } from "Components/Style";
-
+import { Container } from "../../../Components/Style";
+import { MapAlt } from "styled-icons/boxicons-regular/MapAlt";
 /*사람 아이콘 */
 const PersonIco = styled(Person)`
   height: 100px;
@@ -130,6 +131,13 @@ const OptionIcon = styled.img`
       display: none;
     `}
 `;
+const FloorIco = styled(MapAlt)`
+  color: pink;
+  height: 60px;
+  width: 80px;
+
+  content: "";
+`;
 
 /*방정보 담는 컨테이너 */
 const InformationComponent = styled.div`
@@ -230,16 +238,6 @@ const ReviewComponent = styled.div`
   }
 `;
 
-const FloorComponent = styled.div`
-  display: none;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  z-index: 100;
-  width: 100vh;
-  height: 70vh;
-`;
-
 export const PictureBoxComponent = styled.div`
   height: 300px;
   width: 70%;
@@ -304,22 +302,56 @@ function Detail(props) {
     z-index: 1000;
   `;
 
-  function floor() {
-    const f = document.getElementById("floor");
-    console.log(f);
+  const FloorContainer = styled.div`
+    display: none;
+    position: fixed;
 
-    if (f.style.display === "block") {
-      f.style.display = "none";
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  `;
+
+  const FloorImage = styled.img`
+    position: fixed;
+    display: none;
+    z-index: 11;
+    width: 200px;
+    height: 200px;
+  `;
+  function floor() {
+    const floors = document.getElementsByClassName("floor");
+    console.log(floors[1]);
+    if (floors[0].style.display === "flex") {
+      floors[0].style.display = "none";
+      floors[1].style.display = "none";
     } else {
-      f.style.display = "block";
+      floors[0].style.display = "flex";
+      floors[0].style.alignItems = "center";
+      floors[0].style.justifyContent = "center";
+      floors[1].style.display = "block";
     }
   }
 
   return (
-    <>
-      <FloorComponent id="floor"></FloorComponent>
+    <Container>
+      <Header></Header>
       <div style={{ backgroundColor: "white", display: "flex" }}>
-        <Floor onClick={floor}>{/* <MdMap></MdMap> */}</Floor>
+        {/*평면배경*/}
+        <FloorContainer className="floor">
+          {/*평면도 */}
+          <FloorImage
+            visible={true}
+            className="floor"
+            src={autoDoor}
+            alt=""
+          ></FloorImage>
+        </FloorContainer>
+
+        {/* 평면도 펼치는 아이콘 */}
+        <Floor onClick={floor}>
+          <FloorIco></FloorIco>
+        </Floor>
 
         <CFlexComponent style={{ width: "70%", marginTop: "20px" }}>
           {/* picture에 사진url 배열을 넣어주세요 */}
@@ -442,7 +474,7 @@ function Detail(props) {
           </RightBar>
         </right>
       </div>
-    </>
+    </Container>
   );
 }
 

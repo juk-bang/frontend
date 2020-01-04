@@ -64,7 +64,8 @@ export const RightNav = styled.div`
 `;
 
 export const NavigationBar = styled.nav`
-  z-index: 50;
+  z-index: 99;
+  background-color : White;
   width: 100%;
   height: 4.3rem;
   display: flex;
@@ -73,9 +74,8 @@ export const NavigationBar = styled.nav`
   line-height: 1.8rem;
   border-bottom: 0.25px solid rgba(0, 0, 0, 0.5);
 
-  background-color: white;
   font-weight: bold;
-
+  margin-top : 0;
   ${NavItem}:hover {
     color: #185fb7;
     border-bottom: 1px solid #00f500;

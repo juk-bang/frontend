@@ -13,6 +13,7 @@ import {
 //Component
 import Header from "Components/Header";
 import { postCommunityPost } from "Components/Api";
+import { Button } from "../../../Components/Style";
 
 //css style
 const styles = {
@@ -42,9 +43,15 @@ const ContainerEditer = styled.div`
   margin-top: 30px;
 `;
 //form 받기
-const PostForm = styled.form``;
-//submit Button
-const SubmitButton = styled.button``;
+const PostForm = styled.form`
+  width : 70%;
+  margin : 0 auto;
+  ${Button} {
+    position : relative;
+    left : 100%;
+    transform : translateX(-100%);
+  }
+`;
 
 //draft-js custom style
 const styleMap = {
@@ -85,7 +92,7 @@ const CommunityNew = ({
     <Container>
       <Header />
       <PostForm onSubmit={handleSubmitForm}>
-        <TitleInput value={TitleState} onChange={handleChangeTitleInput} />
+        <TitleInput  placeholder="제목을 입력하세요"value={TitleState} onChange={handleChangeTitleInput} />
         <ContainerEditer style={styles.editor}>
           <Editor
             editorState={editorState}
@@ -94,7 +101,7 @@ const CommunityNew = ({
             customStyleMap={styleMap}
           />
         </ContainerEditer>
-        <SubmitButton type="submit">제출하기</SubmitButton>
+        <Button type="submit">제출하기</Button>
       </PostForm>
     </Container>
   );
