@@ -11,6 +11,7 @@ import {
 import Home from "Route/Home";
 import RoomList from "Route/Room/RoomList";
 import CommunityList from "Route/Community/CommunityList";
+import Login from "Route/User/Login";
 
 export default () => {
   return (
@@ -19,6 +20,7 @@ export default () => {
         <Route path="/" exact component={Home} />
         <Route path="/roomlist/:univid" exact component={RoomList} />
         <Route path="/community/:univid" exact component={CommunityList} />
+        <Route path="/login" exact component={Login} />
       </Switch>
     </Router>
   );
