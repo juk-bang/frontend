@@ -4,6 +4,8 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 //Components
 import Header from "Components/Header";
+import { button, Board, Container, CFlexContainer } from "Components/Style";
+
 import {
   getAdminPermissionList,
   postAdminPermission,
@@ -11,11 +13,37 @@ import {
 } from "Components/Api";
 
 //styled-Components
-const Container = styled.div``;
-const UnivButton = styled.button``;
-const ButtonContainer = styled.div``;
-const RoomContainer = styled.div``;
-const PermissionButton = styled.button``;
+
+const UnivButton = styled.a`
+  ${button};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  font-size: 3rem;
+`;
+const ButtonContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5px;
+`;
+
+const RoomContainer = styled.div`
+  margin: 0 auto;
+  margin-top: 5px;
+  border: 2px solid pink;
+  margin-top: 20px;
+  width: 50%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  div {
+    margin: 0 auto;
+  }
+`;
+const PermissionButton = styled.button`
+  ${button};
+`;
 
 //메인함수
 const AdminPermissionList = () => {
@@ -59,26 +87,51 @@ const AdminPermissionList = () => {
       <Header />
       <Container>
         <ButtonContainer>
-          <UnivButton onClick={handleClickUniv}>숭실대</UnivButton>
-          <UnivButton onClick={handleClickUniv}>고려대</UnivButton>
+          <UnivButton backgroundColor="green" onClick={handleClickUniv}>
+            숭실대
+          </UnivButton>
+          <UnivButton backgroundColor="red" onClick={handleClickUniv}>
+            고려대
+          </UnivButton>
         </ButtonContainer>
+
         {PermissionList !== undefined &&
           PermissionList !== null &&
           PermissionList.data.map(each => {
             console.log(each);
             return (
-              <RoomContainer>
+              <>
                 <div id={each.id}></div>
-                {each.month} {each.adminExpenses} {each.deposit} {each.floor}
-                {each.scale} {each.distance} {each.lat} {each.lng} {each.grade}
-                {each.permission}
-                <PermissionButton onClick={handlePermissionClick}>
-                  허가
-                </PermissionButton>
-                <PermissionButton onClick={handlePermissionClick}>
-                  허가 안함
-                </PermissionButton>
-              </RoomContainer>
+                <RoomContainer>
+                  <div>날짜 </div>
+                  <div>{each.month} </div>
+                  <div>관리비</div>
+                  <div>{each.adminExpenses} </div>
+                  <div>보증금 </div>
+                  <div>{each.deposit} </div>
+                  <div>층수</div>
+                  <div>{each.floor}</div>
+                  <div>평수</div>
+                  <div>{each.scale}</div>
+                  <div>거리</div>
+                  <div>{each.distance} </div>
+                  <div>lat</div>
+                  <div>{each.lat}</div>
+                  <div>lng</div>
+                  <div>{each.lng}</div>
+                  <div>평점</div>
+                  <div>{each.grade}</div>
+                  {/* <div>{each.permission}</div> */}
+                </RoomContainer>
+                <ButtonContainer>
+                  <PermissionButton onClick={handlePermissionClick}>
+                    허용함
+                  </PermissionButton>
+                  <PermissionButton onClick={handlePermissionClick}>
+                    허가 안함
+                  </PermissionButton>
+                </ButtonContainer>
+              </>
             );
           })}
       </Container>

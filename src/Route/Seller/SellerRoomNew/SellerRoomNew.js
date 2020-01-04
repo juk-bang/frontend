@@ -71,9 +71,7 @@ const InputGrid = styled.div`
     }
   }
 
-  input {
-    border: 0;
-  }
+  
 `;
 const InputInput = styled.input`
   margin-top: 20px;
@@ -89,7 +87,9 @@ const InputTextArea = styled.textarea`
   background-color: pink;
   border: 0;
   border-radius: 10px;
+  padding :15px;
 `;
+
 const InputCheckBox = styled.input``;
 const InputCheckBoxLabel = styled.label`
   width: 100px;

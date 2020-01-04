@@ -24,7 +24,7 @@ const AdminHome = () => {
     <Container>
       <Header />
 
-      <CFlexContainer width="100%" style={{ width: "100%" }} acenter jcenter>
+      <CFlexContainer mt = "15%" width="100%" style={{ width: "100%" }} acenter jcenter>
         <Board style={{ textAlign: "center" }} width="100%">
           <LinkStyle
             to={`/admin/permissionroom/${localStorage.getItem("userId")}`}
