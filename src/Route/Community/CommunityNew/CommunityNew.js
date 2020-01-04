@@ -46,6 +46,7 @@ const ContainerEditer = styled.div`
 const PostForm = styled.form`
   width : 70%;
   margin : 0 auto;
+  margin-top : 30px;
   ${Button} {
     position : relative;
     left : 100%;
@@ -101,7 +102,7 @@ const CommunityNew = ({
             customStyleMap={styleMap}
           />
         </ContainerEditer>
-        <Button as = "button" type="submit">제출하기</Button>
+        <Button type="submit">제출하기</Button>
       </PostForm>
     </Container>
   );

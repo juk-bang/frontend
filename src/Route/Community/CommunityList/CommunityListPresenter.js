@@ -13,7 +13,6 @@ import { button } from "../../../Components/Style";
 
 const WriteButton = styled(Link)`
   ${button};
-
 `
 //메인 함수
 const ListPresenter = ({
@@ -73,7 +72,7 @@ const ListPresenter = ({
                   <GotoDetail
                     href={`/community/detail/${list.univid}/${list.id}`}
                   >
-                    {list.title}
+                    {list.title} [{list.comments}]
                   </GotoDetail>
                   <div>{list.writer}</div>
                   <div>{list.modifiedDate.slice(0, 10)}</div>

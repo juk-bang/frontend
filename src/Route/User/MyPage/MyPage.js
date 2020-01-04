@@ -39,7 +39,7 @@ const MyPage = () => {
       <NavButton to={`/userinfo/edit/${userId}`} activeStyle={activeStyle}>
         정보수정
       </NavButton>
-      <NavButton to={`/userinfo//${userId}`} activeStyle={activeStyle}>
+      <NavButton to={`/userinfo/chatting/${userId}`} activeStyle={activeStyle}>
         쪽지
       </NavButton>
       <NavButton to={`/userinfo/favorites/${userId}`} activeStyle={activeStyle}>
