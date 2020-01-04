@@ -27,6 +27,9 @@ import Posts from "Route/User/Posts";
 import SellerHome from "Route/Seller/SellerHome";
 import SellerRoomList from "Route/Seller/SellerRoomList";
 import SellerRoomNew from "Route/Seller/SellerRoomNew/SellerRoomNew";
+import AdminHome from "Route/Admin/AdminHome";
+import AdminPermissionList from "Route/Admin/AdminPermissionList";
+import AdminReportList from "Route/Admin/AdminReportList";
 
 export default () => {
   return (
@@ -76,6 +79,14 @@ export default () => {
           exact
           component={SellerRoomNew}
         />
+        {/* 관리자  */}
+        <Route path="/admin/:userid" exact component={AdminHome} />
+        <Route
+          path="/admin/permissionroom/:userid"
+          exact
+          component={AdminPermissionList}
+        />
+        <Route path="/admin/report/:userid" exact component={AdminReportList} />
       </Switch>
     </Router>
   );

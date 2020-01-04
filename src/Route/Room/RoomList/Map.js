@@ -184,7 +184,7 @@ class Map extends Component {
           ref="map"
           style={{ width: "100%", height: "100%", position: "fixed" }}
         />
-        <div class="roomcard"></div>
+        <div className="roomcard"></div>
         {this.state.markers.map(each => {
           console.log(each.position.lat);
           if (
