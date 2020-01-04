@@ -21,7 +21,8 @@ import {
   FlexComponent,
   BoardInformation,
   BoardContent,
-  CommentBox
+  CommentBox,
+  EditButton
 } from "./style";
 import {
   Color,
@@ -33,7 +34,12 @@ import {
 } from "Components/Style";
 
 //styled-components
-const PostCommentForm = styled.form``;
+const PostCommentForm = styled.form`
+  display: flex;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+`;
 
 //메인함수
 const CommunityDetail = ({
@@ -170,7 +176,7 @@ const CommunityDetail = ({
     <Container>
       <Header />
       <Board>
-        <FlexComponent>
+        <FlexComponent width="100%">
           <Button onClick={handleButtonGoToLists}>리스트로</Button>
           <FlexComponent direction="end">
             {Post.previd == "0" ? (
@@ -185,7 +191,7 @@ const CommunityDetail = ({
             ) : (
               <Button
                 style={{ top: 0 }}
-                color={Color.deepPink}
+                backgroundColor={Color.deepPink}
                 onClick={handleClickNextPost}
               >
                 다음글
@@ -198,11 +204,16 @@ const CommunityDetail = ({
           <FlexComponent>
             <b>{Post.title} </b>
             {/* {this.state.writer === localStorage.writer &} */}
-            <FlexComponent>
+            <FlexComponent style={{ position: "relative", bottom: "8px" }}>
               {localStorage.getItem("LoggedIn") == "true" &&
               Post.writer == localStorage.getItem("userId") ? (
                 <>
-                  <Link to={`/community/modify/${univid}/${postid}`}>수정</Link>
+                  <EditButton
+                    radius="radius"
+                    to={`/community/modify/${univid}/${postid}`}
+                  >
+                    수정
+                  </EditButton>
                   <Button radius="radius" onClick={handledeletedata}>
                     삭제
                   </Button>
@@ -214,7 +225,7 @@ const CommunityDetail = ({
           </FlexComponent>
           <hr></hr>
 
-          <FlexComponent>
+          <FlexComponent style={{ margin: 0 }}>
             <div className="id">{Post.writer}</div>
             <div className="day">{Post.modifiedDate}</div>
           </FlexComponent>
@@ -267,12 +278,7 @@ const CommunityDetail = ({
                   title="댓글입력"
                   rows="3"
                 ></textarea>
-                <Button
-                  style={{ position: "relative", top: "-8px" }}
-                  type="submit"
-                >
-                  댓글입력
-                </Button>
+                <Button type="submit">댓글입력</Button>
               </PostCommentForm>
             </CommentBox>
           ) : (

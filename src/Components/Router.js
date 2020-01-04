@@ -54,6 +54,8 @@ export default () => {
         <Route path="/userinfo/:userid" exact component={MyPage} />
         <Route path="/userinfo/favorites/:userid" exact component={Favorites} />
         <Route path="/userinfo/edit/:userid" exact component={Edit} />
+        {/* <Route path="/userinfo/chatting/:userid" exact component={Chatting} /> */}
+        {/* <Route path="/userinfo/chatting/:userid/:partnerid" exact component={ChattingDetail} /> */}
         <Route path="/userinfo/secession/:userid" exact component={Secession} />
         <Route path="/userinfo/posts/:userid" exact component={Posts} />
         {/* 방 판매자 */}

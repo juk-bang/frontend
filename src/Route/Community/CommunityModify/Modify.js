@@ -183,25 +183,29 @@ const Modify = ({
 
             <ContainerEditer>
               <Button
-                color={currentStyle.has("BOLD") ? "red" : "pink"}
+                as = "a"
+                backgroundColor={currentStyle.has("BOLD") ? "red" : "pink"}
                 onMouseDown={_onBoldClick.bind(editorState)}
               >
                 Bold
               </Button>
               <Button
-                color={currentStyle.has("ITALIC") ? "red" : "pink"}
+                as = "a"
+                backgroundColor={currentStyle.has("ITALIC") ? "red" : "pink"}
                 onMouseDown={_onItalicClick.bind(editorState)}
               >
                 Italic
               </Button>
               <Button
-                color={currentStyle.has("UNDERLINE") ? "red" : "pink"}
+                as = "a"
+                backgroundColor={currentStyle.has("UNDERLINE") ? "red" : "pink"}
                 onMouseDown={_onUnderLineClick.bind(editorState)}
               >
                 Under Line
               </Button>
               <Button
-                color={currentStyle.has("HIGHLIGHT") ? "red" : "pink"}
+                as = "a"
+                backgroundColor={currentStyle.has("HIGHLIGHT") ? "red" : "pink"}
                 onMouseDown={_onHighlightClick.bind(editorState)}
               >
                 highlight

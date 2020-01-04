@@ -173,6 +173,11 @@ export const Board = styled.div`
   ${height}
   ${margin};
   ${padding};
+  @media (min-width: 800px) 
+   {
+      width : 55%;
+    }
+  
 `;
 
 const recButton = css`
@@ -231,11 +236,12 @@ export const button = css`
 export const Button = styled.button`
   ${button}
 `;
-/*일반적 작은 사각형 버튼(기본 색상 : 핑크) */
+/*일반적 작은 사각형 버튼s(기본 색상 : 핑크) */
 export const SmallButton = styled.button`
   ${button}
   font-size : 0.8rem;
-  padding: 0px 5px;
+  padding: 2px 5px;
+  margin : 0px;
 `;
 
 

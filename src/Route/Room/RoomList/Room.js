@@ -4,7 +4,7 @@ import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 import heart from "img/heart.png";
 
-const RoomList = styled.div`
+export const RoomList = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   background-color: pink;
@@ -160,7 +160,7 @@ function Room() {
         "https://ic.zigbang.com/ic/items/19317951/1.jpg?w=800&h=600&q=70&a=1",
       structure: "원룸",
       price: {
-        type: "월세",
+       
         deposit: 100,
         month: 50,
         adminExpnse: 5

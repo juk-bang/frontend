@@ -1,5 +1,8 @@
 import styled, { css } from "styled-components";
 import { boxShadow, Color, Button } from "Components/Style";
+import { button } from "../../../Components/Style";
+import {Link} from "react-router-dom"
+
 
 export const FlexComponent = styled.div`
   display: flex;
@@ -16,7 +19,7 @@ export const FlexComponent = styled.div`
     background: rgba(198, 248, 198, 0.692);
     max-width: fit-content;
     border-radius: 10%;
-    padding: 2px 5px;
+    padding: 0px 5px;
   }
 
   .day {
@@ -64,9 +67,9 @@ export const CommentBox = styled.div`
 
   display: flex;
   flex-direction: column;
-
+  justify-content : flex-start;
   textarea {
-    width: 88%;
+    width: 100%;
     height: 5rem;
     font-size: 1rem;
     resize: none;
@@ -76,7 +79,7 @@ export const CommentBox = styled.div`
   }
   ${Button} {
     margin-left: 0.6rem;
-    margin-top: 3.2rem;
+   
     min-width: fit-content;
   }
   div {
@@ -101,3 +104,7 @@ export const BoardContent = styled.div`
   padding: 5px 10px;
   font-weight: 300;
 `;
+
+export const EditButton = styled(Link)`
+  ${button}
+  `
