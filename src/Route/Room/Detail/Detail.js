@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import styled, { css, keyframes } from "styled-components";
 import Header from "Components/Header";
@@ -23,10 +23,13 @@ import { Person } from "styled-icons/material/Person";
 import { Wechat2 } from "styled-icons/remix-fill/Wechat2";
 import { AddAlert } from "styled-icons/material/AddAlert";
 import { Color, FlexContainer } from "Components/Style";
-import { Container } from "../../../Components/Style";
+import { Container } from "Components/Style";
 import { MapAlt } from "styled-icons/boxicons-regular/MapAlt";
 
 import FloorPlan from "./FloorPlan";
+import { getRoomDetail, getReviewList, postReview } from "Components/Api";
+import { withRouter } from "react-router-dom";
+
 /*사람 아이콘 */
 const PersonIco = styled(Person)`
   height: 100px;
@@ -279,8 +282,33 @@ function Picture({ picture }) {
   );
 }
 
-function Detail(props) {
-  const { location, history } = props;
+function Detail({
+  location,
+  history,
+  match: {
+    params: { univid, roomid }
+  }
+}) {
+  let [RoomInfomation, SetRoomInfomation] = useState();
+  const getRoqomDetails = async () => {
+    const detail = await getRoomDetail(univid, roomid);
+    RoomInfomation = detail.data;
+    SetRoomInfomation(RoomInfomation);
+  };
+
+  let [ReviewList, SetReviewList] = useState();
+  const getReviewLists = async () => {
+    const detail = await getReviewList(univid, roomid);
+    ReviewList = detail.data;
+    SetReviewList(ReviewList);
+    console.log(ReviewList);
+  };
+
+  useEffect(() => {
+    getRoqomDetails();
+    getReviewLists();
+  }, []);
+  console.log(RoomInfomation);
 
   if (location.state === undefined) {
     history.push("/");
@@ -304,9 +332,12 @@ function Detail(props) {
     z-index: 1000;
   `;
 
+  const handleReviewSumbit = e => {
+    console.dir(e.target.parentElement.parentElement.children[0]);
+  };
+  //메인 함수
   function floor() {
     const floors = document.getElementsByClassName("floor");
-    console.log(floors[1]);
     if (floors[0].style.display === "flex") {
       floors[0].style.display = "none";
       floors[1].style.display = "none";
@@ -336,21 +367,28 @@ function Detail(props) {
             <h3>방정보</h3>
             <RoomInfo>
               <div>주소</div>
-              <div>{/*address */}</div>
+              <div>
+                {RoomInfomation !== undefined && RoomInfomation.address}
+              </div>
               <div>통학거리</div>
-              <div>{/*distance*/}m</div>
+              <div>
+                {RoomInfomation !== undefined && RoomInfomation.distance}m
+              </div>
               <div>건물형태</div>
-              <div>{/*structure*/}</div>
+              <div>원룸</div>
               <div>가격</div>
               <div>
-                {/*price.deposit*/}만원/{/*price.month*/}만원
+                {RoomInfomation !== undefined && RoomInfomation.month}만원/
+                {RoomInfomation !== undefined && RoomInfomation.deposit}만원
               </div>
               <div>면적</div>
-              <div>{/*scale*/}</div>
+              <div>{RoomInfomation !== undefined && RoomInfomation.scale}</div>
               <div>관리비</div>
-              <div>{/*adminExpenses*/}</div>
+              <div>
+                {RoomInfomation !== undefined && RoomInfomation.adminExpenses}
+              </div>
               <div>층수</div>
-              <div>{/*floor*/}</div>
+              <div>{RoomInfomation !== undefined && RoomInfomation.floor}</div>
             </RoomInfo>
           </InformationComponent>
           <InformationComponent>
@@ -361,12 +399,44 @@ function Detail(props) {
                 src={airconditioner}
                 alt=""
               ></OptionIcon>
-              <OptionIcon visible={true} src={autoDoor} alt=""></OptionIcon>
-              <OptionIcon visible={true} src={cctv} alt=""></OptionIcon>
-              <OptionIcon visible={true} src={elevator} alt=""></OptionIcon>
-              <OptionIcon visible={true} src={gasrange} alt=""></OptionIcon>
-              <OptionIcon visible={true} src={park} alt=""></OptionIcon>
-              <OptionIcon visible={true} src={refrigerator} alt=""></OptionIcon>
+              <OptionIcon
+                visible={
+                  RoomInfomation !== undefined && RoomInfomation.autoDoor
+                }
+                src={autoDoor}
+                alt=""
+              ></OptionIcon>
+              <OptionIcon
+                visible={RoomInfomation !== undefined && RoomInfomation.cctv}
+                src={cctv}
+                alt=""
+              ></OptionIcon>
+              <OptionIcon
+                visible={
+                  RoomInfomation !== undefined && RoomInfomation.elevator
+                }
+                src={elevator}
+                alt=""
+              ></OptionIcon>
+              <OptionIcon
+                visible={
+                  RoomInfomation !== undefined && RoomInfomation.gasrange
+                }
+                src={gasrange}
+                alt=""
+              ></OptionIcon>
+              <OptionIcon
+                visible={RoomInfomation !== undefined && RoomInfomation.park}
+                src={park}
+                alt=""
+              ></OptionIcon>
+              <OptionIcon
+                visible={
+                  RoomInfomation !== undefined && RoomInfomation.refrigerator
+                }
+                src={refrigerator}
+                alt=""
+              ></OptionIcon>
               <OptionIcon
                 visible={true}
                 src={washingMachine}
@@ -377,13 +447,25 @@ function Detail(props) {
           <InformationComponent>
             <h3>주변시설</h3>
             <div className="icon">
-              <OptionIcon visible={true} src={subway} alt=""></OptionIcon>
-              <OptionIcon visible={true} src={bus} alt=""></OptionIcon>
+              <OptionIcon
+                visible={
+                  RoomInfomation !== undefined && RoomInfomation.subwayStation
+                }
+                src={subway}
+                alt=""
+              ></OptionIcon>
+              <OptionIcon
+                visible={
+                  RoomInfomation !== undefined && RoomInfomation.busStation
+                }
+                src={bus}
+                alt=""
+              ></OptionIcon>
             </div>
           </InformationComponent>
           <InformationComponent>
             <h3>상세설명</h3>
-            <p>{/* description*/}</p>
+            <p>{RoomInfomation !== undefined && RoomInfomation.description}</p>
           </InformationComponent>
 
           <InformationComponent>
@@ -401,8 +483,7 @@ function Detail(props) {
 
                   <input placeholder="리뷰를 작성하세요"></input>
                 </CFlexComponent>
-
-                <ChattingIco></ChattingIco>
+                <ChattingIco onClick={handleReviewSumbit}></ChattingIco>
               </FlexComponent>
             </ReviewComponent>
             <ReviewScroll>
@@ -426,7 +507,9 @@ function Detail(props) {
                 <Button>
                   <AlertIco></AlertIco>
                 </Button>
-                <Button>{/*grade */}4.5</Button>
+                <Button>
+                  {RoomInfomation !== undefined && RoomInfomation.grade}
+                </Button>
                 <Button>
                   <HeartIco></HeartIco>
                 </Button>
@@ -443,7 +526,9 @@ function Detail(props) {
               >
                 {/* 사람 아이콘  */}
                 <PersonIco></PersonIco>
-                <h2>{/*sellerid*/}id1234</h2>
+                <h2>
+                  {RoomInfomation !== undefined && RoomInfomation.sellerid}
+                </h2>
                 <ChattingIco></ChattingIco>
               </FlexContainer>
             </CFlexComponent>
@@ -454,4 +539,4 @@ function Detail(props) {
   );
 }
 
-export default Detail;
+export default withRouter(Detail);

@@ -107,6 +107,7 @@ export const RoomItemComponent = styled(Link)`
 `;
 
 function RoomItem({
+  univid,
   id,
   thumbnail,
   structure,
@@ -132,7 +133,7 @@ function RoomItem({
     <RoomItemComponent
       className="room"
       to={{
-        pathname: `1/1`,
+        pathname: `${univid}/${id}`,
         state: {}
       }}
     >
@@ -193,23 +194,26 @@ function Room({
     <RoomList>
       {roomListState !== undefined &&
         roomListState !== null &&
-        roomListState.map(room => (
-          <RoomItem
-            key={room.id}
-            id={room.id}
-            thumbnail={""}
-            structure={room.structure}
-            price={{
-              month: room.month,
-              deposit: room.deposit,
-              adminExpense: room.adminExpenses
-            }}
-            floor={room.floor}
-            scale={room.scale}
-            grade={room.grade}
-            distance={room.distance}
-          ></RoomItem>
-        ))}
+        roomListState.map(room => {
+          return (
+            <RoomItem
+              univid={univid}
+              key={room.id}
+              id={room.id}
+              thumbnail={""}
+              structure={room.structure}
+              price={{
+                month: room.month,
+                deposit: room.deposit,
+                adminExpense: room.adminExpenses
+              }}
+              floor={room.floor}
+              scale={room.scale}
+              grade={room.grade}
+              distance={room.distance}
+            ></RoomItem>
+          );
+        })}
     </RoomList>
   );
 }
