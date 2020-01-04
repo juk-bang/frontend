@@ -20,6 +20,11 @@ export const postCommunityPost = async (univid, title, body) => {
     body: body
   });
 };
+//커뮤니티 상세보기
+export const getCommunityPost = async (univid, postid) => {
+  const Post = await allApi.get(`/community/${univid}/${postid}`);
+  return Post;
+};
 
 //방
 //방 리스트 얻기
