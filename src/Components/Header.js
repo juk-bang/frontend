@@ -28,10 +28,12 @@ export default () => {
         <RightNav>
           <NavItem to={`/roomlist/${Univ}`}>방 리스트</NavItem>
           <NavItem to={`/community/${Univ}`}>커뮤니티</NavItem>
-          <NavItem to={"/seller"}>방 판매자 페이지</NavItem>
+          <NavItem to={"/manager"}>방 판매자 페이지</NavItem>
           {localStorage.getItem("LoggedIn") == "true" ? (
             <>
-              <NavItem to={`/room/${Univ}`}>마이 페이지</NavItem>
+              <NavItem to={`/userinfo/${localStorage.getItem("userId")}`}>
+                마이 페이지
+              </NavItem>
               <NavItem to={"/logout"}> 로그아웃 </NavItem>
             </>
           ) : (
