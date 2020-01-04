@@ -12,7 +12,7 @@ export const getCommunityList = async univid => {
   return List;
 };
 
-//
+//방 리스트 얻기
 export const getRoomList = async univid => {
   const List = await allApi.get(`/roomdata/${univid}`);
   return List;
