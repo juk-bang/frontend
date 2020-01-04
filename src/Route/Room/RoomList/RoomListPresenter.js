@@ -10,11 +10,12 @@ import Navigation from "./Navigation";
 import MyFilter from "./Filter/MyFilter";
 /*룸리스트 창*/
 import Room from "./Room";
+//맵
+import Map from "./Map";
 
 /*스타일 관련 라이브러리 */
-import {RoomListComponent} from "../style";
-import { Container, Board, FlexContainer} from "Components/Style";
-
+import { RoomListComponent } from "../style";
+import { Container, Board, FlexContainer } from "Components/Style";
 
 const RoomListPresenter = ({
   match: {
@@ -60,7 +61,7 @@ const RoomListPresenter = ({
       <Header />
       <FlexContainer>
         <Board width="50%" p="0px">
-          {/* 지도들어갈 자리 */}
+          <Map />
         </Board>
         <Board width="50%" p="0px">
           <Navigation onFilter={onFilter} nav={nav}></Navigation>
