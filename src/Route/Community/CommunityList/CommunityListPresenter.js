@@ -47,9 +47,6 @@ const ListPresenter = ({
       <Board>
         {localStorage.getItem("LoggedIn") == "true" ? (
           <>
-            <Button color={Color.mint} to={`/community/${univid}/new`}>
-              글쓰기
-            </Button>
             <Link color={Color.mint} to={`/community/${univid}/new`}>
               글쓰기
             </Link>
