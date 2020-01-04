@@ -101,7 +101,7 @@ const CommunityNew = ({
             customStyleMap={styleMap}
           />
         </ContainerEditer>
-        <Button type="submit">제출하기</Button>
+        <Button as = "button" type="submit">제출하기</Button>
       </PostForm>
     </Container>
   );

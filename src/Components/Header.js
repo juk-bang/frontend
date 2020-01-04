@@ -31,7 +31,7 @@ export default () => {
           <NavItem to={"/manager"}>방 판매자 페이지</NavItem>
           {localStorage.getItem("LoggedIn") == "true" ? (
             <>
-              <NavItem to={`/userinfo/${localStorage.getItem("userId")}`}>
+              <NavItem to={`/userinfo/edit/${localStorage.getItem("userId")}`}>
                 마이 페이지
               </NavItem>
               <NavItem to={"/logout"}> 로그아웃 </NavItem>

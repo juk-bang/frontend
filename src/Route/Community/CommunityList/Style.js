@@ -22,7 +22,7 @@ export const BoardList = styled.div`
   grid-template-columns: 5fr 1.3fr 1fr 0.7fr;
   grid-template-rows: repeat(10, 2fr);
   line-height: 2.5rem;
-
+  margin-top : 10px;
   a,
   div:not(${BoardTitle}) {
     border-bottom: 1px solid pink;
