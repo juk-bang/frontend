@@ -1,18 +1,19 @@
 import styled, { css } from "styled-components";
 import { createGlobalStyle } from "styled-components";
 
-
+//공통색상
 export const Color = {
   deepPink: "#fd9bbb",
   mint: "#4de0c2",
   green: "rgba(198, 248, 198, 0.692)"
 };
 
+//그림자
 export const boxShadow = css`
   box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.12),
     0 18px 36px -18px rgba(0, 0, 0, 0.1);
 `;
-
+//margin주기
 const margin = css`
 
     ${({ m }) =>
@@ -37,6 +38,7 @@ const margin = css`
       `}
 `;
 
+//패딩주기
 const padding = css`
 
     ${({ p }) =>
@@ -69,25 +71,98 @@ const width = css`
     `}
 `;
 
+const height = css`
+  ${({ height }) =>
+    css`
+      width: ${height};
+    `}
+`;
+
 const container = css`
   width: 100%;
+  height : fit-content;
+  ${width};
+  ${height};
   ${margin};
   ${padding};
 `;
+
+
 export const Container = styled.div`
+ content : "";
   ${container}
 `;
 
+/*flex content 기준점 위치설정 */
+const jcenter = css`
+  ${({jcenter})=>
+    jcenter&&css`
+      justify-content : center;
+    `
+  }
+`
+
+const acenter = css`
+  ${({acenter})=>
+    acenter&&css`
+      align-items: center;
+    `
+  }
+`
+
+const astart= css`
+  ${({astart})=>
+    astart&&css`
+      align-items: flex-start;
+    `
+  }
+`
+
+const aend = css`
+  ${({aend})=>
+    aend&&css`
+      align-items: flex-end;
+    `
+  }
+`
+
+const jstart= css`
+  ${({jstart})=>
+    jstart&&css`
+      justify-content: flex-start;
+    `
+  }
+`
+
+const jend = css`
+  ${({jend})=>
+    jend&&css`
+     justify-content: flex-end;
+    `
+  }
+`
+
+export const flex = css`
+  display:flex;
+  ${container}
+  ${acenter};
+  ${jcenter};
+  ${astart};
+  ${aend};
+  ${jstart};
+  ${jend};
+`
+/*flex속성을 가지는 컨테이너, props로 flex-start, flex-end속성주기 가능 */
 export const FlexContainer = styled.div`
-  ${container}
-  display : flex;
-`;
-export const CFlexContainer = styled.div`
-  ${container}
-  display : flex;
-  flex-direction: column;
-`;
+  ${flex};
+`
 
+/*flex속성(direction이 column)을 가지는 컨테이너, props로 flex-start, flex-end속성주기 가능 */
+export const CFlexContainer = styled.div`
+  ${flex};
+  flex-direction : column;
+`;
+/*padding이 있으며 text가 가운데 정렬이 되는 컨테이너 */
 export const Board = styled.div`
   width: 70%;
   padding: 25px;
@@ -95,59 +170,75 @@ export const Board = styled.div`
   font-size: 1rem;
 
   ${width};
+  ${height}
   ${margin};
   ${padding};
 `;
 
-const RecCss = css`
+const recButton = css`
   text-decoration: none;
   min-width: fit-content;
   padding: 5px;
   font-size: 1.2rem;
   height: max-content;
   cursor: pointer;
-  position: relative;
-  top: -0.5rem;
+  ${padding};
   ${margin};
 `;
 
-const RadiusButtonCss = css`
-  ${RecCss};
+const radiusButton= css`
+  ${recButton};
   padding: 5px 8px;
   border-radius: 10px;
 `;
 
-export const Buttoncss = css`
-  color: white;
+export const button = css`
+
+  color : white;
   background-color: pink;
   border: 2px solid;
+
   :hover {
     color: pink;
     background-color: white;
     border: 2px solid pink;
   }
-  ${RecCss};
-  ${({ radius }) => radius === "radius" && RadiusButtonCss}
-  ${({ color }) => css`
-    background-color: ${color};
 
+  ${recButton};
+
+  /*radius를 props로 전달하면 둥근 버튼이 형성 */
+  ${({ radius }) => radius === "radius" && radiusButton}
+
+  /* 버튼의 색상(color), 배경색 지정가능(backgroundColor) */
+  ${({ color, backgroundColor }) => css`
+    color: ${color};
+    background-color :${backgroundColor};
     &:hover {
-      color: ${color};
-      background-color: white;
-      border: 2px solid ${color};
+      color: ${backgroundColor};
+      background-color: ${color};
+      border: 2px solid ${backgroundColor};
     }
   `}
+    /*폰트 크기 설정 */
+    ${({fontSize}) => css`
+      font-size : ${fontSize};
+    `}
 `;
 
+
+
+/*일반적 사각형 버튼(기본 색상 : 핑크) */
 export const Button = styled.button`
-  ${Buttoncss}
+  ${button}
 `;
-
-export const SmallButton = styled.a`
-  ${Buttoncss}
+/*일반적 작은 사각형 버튼(기본 색상 : 핑크) */
+export const SmallButton = styled.button`
+  ${button}
   font-size : 0.8rem;
   padding: 0px 5px;
 `;
+
+
 export const GlobalStyles = createGlobalStyle`
   body {
     margin: 0;

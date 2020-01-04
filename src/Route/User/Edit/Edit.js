@@ -5,18 +5,49 @@ import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 //Components
 import Header from "Components/Header";
+import MyPage from "../MyPage/MyPage";
 
 //styled-Components
-const Container = styled.div``;
+import {
+  FlexContainer,
+  CFlexContainer,
+  boxShadow,
+  Button,
+  Board
+} from "Components/Style";
+
 const Input = styled.input``;
-const SubmitButton = styled.button``;
+
 const SubmitForm = styled.form``;
 
+const Manage = styled(CFlexContainer)`
+  padding: 5px;
+  content: "";
+  width: 100%;
+  ${Board} {
+    text-align: center;
+
+    width: 100%;
+    border: 2px solid pink;
+    border-radius: 10px;
+    font-size: 1.7rem;
+    ${boxShadow};
+    div:first-child {
+      font-weight: 800;
+      margin-bottom: 15px;
+    }
+  }
+  input {
+    font-size: 1.5rem;
+  }
+`;
+
 //메인함수
-const Favorites = ({
+const Edit = ({
   match: {
     params: { userid }
-  }
+  },
+  history
 }) => {
   //아이디를 저장하는 state
   const [LocalUserid, SetLocalUserid] = useState(userid);
@@ -32,18 +63,38 @@ const Favorites = ({
     localStorage.setItem("userId", LocalUserid);
   };
 
+  const handleClickNo = e => {
+    e.preventDefault();
+    console.log(history);
+    const asw = window.confirm("정말로 삭제하시겠습니까?");
+    if (asw === true) {
+    }
+  };
+
   return (
     <>
       <Header />
-      <Container>
-        <SubmitForm onSubmit={handleSubmitForm}>
-          아이디
-          <Input value={LocalUserid} onChange={handleChangeId} />
-          <SubmitButton type="submit" />
-        </SubmitForm>
-      </Container>
+      <FlexContainer>
+        <MyPage></MyPage>
+        <Manage mt="100px" acenter>
+          <SubmitForm onSubmit={handleSubmitForm}>
+            <Board>
+              <div>내 정보 </div>
+              <Input value={LocalUserid} onChange={handleChangeId} />
+              <FlexContainer jcenter mt="10px">
+                <Button type="submit" radius="radius">
+                  수정
+                </Button>
+                <Button onClick={handleClickNo} radius="radius">
+                  삭제
+                </Button>
+              </FlexContainer>
+            </Board>
+          </SubmitForm>
+        </Manage>
+      </FlexContainer>
     </>
   );
 };
 
-export default withRouter(Favorites);
+export default withRouter(Edit);

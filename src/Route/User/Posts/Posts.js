@@ -8,6 +8,8 @@ import { getCommunityList } from "Components/Api";
 //style
 import { BoardList, BoardTitle, GotoDetail } from "./Style";
 import { Button, Board, Color } from "Components/Style";
+import MyPage from "../MyPage/MyPage";
+import { FlexContainer } from "../../../Components/Style";
 
 //메인 함수
 const Posts = ({
@@ -44,7 +46,9 @@ const Posts = ({
   return (
     <div>
       <Header />
-      <Board>
+      <MyPage></MyPage>
+      <FlexContainer jcenter astart>
+      <Board width = "60%">
         {localStorage.getItem("LoggedIn") == "true" ? (
           <>
             <Link color={Color.mint} to={`/community/${univid}/new`}>
@@ -76,6 +80,8 @@ const Posts = ({
               ))}
         </BoardList>
       </Board>
+      </FlexContainer>
+     
     </div>
   );
 };

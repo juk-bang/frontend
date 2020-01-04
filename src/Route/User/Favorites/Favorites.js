@@ -4,6 +4,8 @@ import React from "react";
 import styled from "styled-components";
 //Components
 import Header from "Components/Header";
+import MyPage from "../MyPage/MyPage";
+import { FlexContainer } from "../../../Components/Style";
 
 //styled-Components
 const Container = styled.div``;
@@ -13,7 +15,10 @@ const Favorites = () => {
   return (
     <>
       <Header />
-      <Container>hello</Container>방 페이지
+      <FlexContainer>
+        <MyPage></MyPage>
+        <Container>hello</Container>방 페이지
+      </FlexContainer>
     </>
   );
 };

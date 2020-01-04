@@ -3,7 +3,7 @@ import axios from "axios";
 
 //Base Url
 const allApi = axios.create({
-  baseURL: "http://10.16.131.62"
+  baseURL: "http://10.16.131.62:8080"
 });
 
 //커뮤니티

@@ -29,7 +29,7 @@ import {
   Container,
   Board,
   Button,
-  Buttoncss
+  button
 } from "Components/Style";
 
 //styled-components
@@ -102,7 +102,7 @@ const CommunityDetail = ({
     body.innerHTML = "";
 
     Input.value = e.target.dataset.body;
-    InputButton.style = Buttoncss;
+    InputButton.style = button;
     InputButton.style.marginTop = "3px";
     InputButton.innerText = "수정하기";
     e.target.parentElement.parentElement.parentElement.children[1].appendChild(

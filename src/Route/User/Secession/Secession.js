@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { withRouter } from "react-router-dom";
 //Components
 import Header from "Components/Header";
+import MyPage from "../MyPage/MyPage";
+import { FlexContainer } from "Components/Style";
 
 //styled-Components
 const Container = styled.div``;
@@ -25,11 +27,14 @@ const Secession = ({ history }) => {
   return (
     <>
       <Header />
-      <Container>
-        <AnwserContainer>정말로 탈퇴하시겠습니까?</AnwserContainer>
-        <ConfirmButton>네</ConfirmButton>
-        <ConfirmButton onClick={handleClickNo}>아니요</ConfirmButton>
-      </Container>
+      <FlexContainer>
+        <MyPage></MyPage>
+        <Container>
+          <AnwserContainer>정말로 탈퇴하시겠습니까?</AnwserContainer>
+          <ConfirmButton>네</ConfirmButton>
+          <ConfirmButton onClick={handleClickNo}>아니요</ConfirmButton>
+        </Container>
+      </FlexContainer>
     </>
   );
 };
