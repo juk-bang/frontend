@@ -8,7 +8,7 @@ import { withRouter } from "react-router-dom";
 import Header from "Components/Header";
 import { postManagerRoom } from "Components/Api";
 import { Container, button } from "Components/Style";
-import { FlexContainer, CFlexContainer } from "../../../Components/Style";
+import { FlexContainer, CFlexContainer } from "Components/Style";
 
 Geocode.setApiKey("AIzaSyA5dcQNQLNnj6Tw8B49RnZDTJIBF6TA9Uk");
 Geocode.setLanguage("ko");
@@ -227,6 +227,7 @@ const SellerRoomNew = ({ history }) => {
     if (e.target.elements[29].files.length == 1) {
       pictureList.push(e.target.elements[29].files[0]);
     }
+    NewState.pictureCount = pictureList.length;
     SetNewState({
       ...NewState
     });

@@ -72,6 +72,11 @@ export const getRoomList = async univid => {
   const List = await allApi.get(`/roomlist/${univid}`);
   return List;
 };
+//방 디테일 얻기
+export const getRoomDetail = async (univid, roomid) => {
+  const List = await allApi.get(`/roomdetail/${univid}/${roomid}`);
+  return List;
+};
 
 //판매자
 //판매자 매물 올리기
@@ -115,6 +120,20 @@ export const getAdminReportList = async univid => {
   return List;
 };
 
+//리뷰
+//리뷰 리스트 받기
+export const getReviewList = async (univid, roomid) => {
+  const List = await allApi.get(`/review/${univid}/${roomid} `);
+  return List;
+};
+//리뷰 쓰기
+export const postReview = async (univid, roomid, title, body) => {
+  await allApi.post(`/review/${univid}/${roomid}`, {
+    writer: localStorage.getItem("userId"),
+    title: title,
+    body: body
+  });
+};
 
 //마이페이지
 //커뮤니티 게시글 리스트 얻기
