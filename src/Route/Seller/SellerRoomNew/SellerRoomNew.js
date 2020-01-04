@@ -7,6 +7,8 @@ import { withRouter } from "react-router-dom";
 //Components
 import Header from "Components/Header";
 import { postManagerRoom } from "Components/Api";
+import { Container, button } from "Components/Style";
+import { FlexContainer, CFlexContainer } from "../../../Components/Style";
 
 Geocode.setApiKey("AIzaSyA5dcQNQLNnj6Tw8B49RnZDTJIBF6TA9Uk");
 Geocode.setLanguage("ko");
@@ -14,24 +16,84 @@ Geocode.setRegion("kr");
 Geocode.enableDebug();
 
 //styled-components
-const SelectUniv = styled.select``;
+const SelectUniv = styled.select`
+  border: 2px solid pink;
+`;
 const OptionUniv = styled.option``;
-const Container = styled.div``;
-const InputContainer = styled.div``;
-const InputTitle = styled.div``;
-const SubmitForm = styled.form``;
+const InputContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+`;
+const InputTitle = styled.div`
+  margin-bottom: 10px;
+  font-size: 1.4rem;
+
+  font-weight: 600;
+`;
+const SubmitForm = styled.form`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+
+  #map {
+    margin-top: 10px;
+  }
+`;
 const SubmitButton = styled.button`
-  height: 100px;
+  ${button}
+
   width: 100px;
+  padding: 10px;
+  margin-bottom: 20px;
+`;
+
+const InputGrid = styled.div`
+  display: grid;
+
+  width: 70%;
+
+  grid-template-columns: repeat(2, 1fr 2fr);
+
+  div {
+    height: 30px;
+    border-bottom: 1px dashed pink;
+    line-height: 23px;
+
+    font-size: 13px;
+    text-align: center;
+
+    &:nth-child(2n + 1) {
+      font-weight: bold;
+    }
+  }
+
+  input {
+    border: 0;
+  }
 `;
 const InputInput = styled.input`
+  margin-top: 20px;
   width: 50%;
+  border: 3px solid pink;
+  padding: 5px;
 `;
+
 const InputTextArea = styled.textarea`
-  width: 50%;
+  width: 500px;
+  height: 300px;
+  resize: none;
+  background-color: pink;
+  border: 0;
+  border-radius: 10px;
 `;
 const InputCheckBox = styled.input``;
-const InputCheckBoxLabel = styled.label``;
+const InputCheckBoxLabel = styled.label`
+  width: 100px;
+`;
 const InputImage = styled.input``;
 
 //메인함수
@@ -214,95 +276,111 @@ const SellerRoomNew = ({ history }) => {
             <InputInput value={MapState.address}></InputInput>
           </InputContainer>
           <InputContainer>
-            <InputTitle>방 크기를 넣으세요</InputTitle>
-            <InputInput type="number"></InputInput>
+            <InputTitle>방정보</InputTitle>
+            <InputGrid>
+              <InputTitle>방 크기</InputTitle>
+              <div>
+                <input type="number"></input>
+              </div>
+              <InputTitle>월세</InputTitle>
+              <div>
+                {" "}
+                <input type="number"></input>
+              </div>
+              <InputTitle>관리비</InputTitle>
+              <div>
+                {" "}
+                <input type="number"></input>
+              </div>
+              <InputTitle>보증금</InputTitle>
+              <div>
+                <input type="number"></input>
+              </div>
+              <InputTitle>층 (*지하는 -1, 반지하는 -0.5)</InputTitle>
+              <div>
+                <input type="number"></input>
+              </div>
+            </InputGrid>
           </InputContainer>
           <InputContainer>
-            <InputTitle>층을 넣으세요 (지하는 -1, 반지하는 -0.5)</InputTitle>
-            <InputInput type="number"></InputInput>
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>월세를 넣으세요</InputTitle>
-            <InputInput type="number"></InputInput>
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>관리비를 넣으세요</InputTitle>
-            <InputInput type="number"></InputInput>
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>보증금을 넣으세요</InputTitle>
-            <InputInput type="number"></InputInput>
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>설명을 넣으세요</InputTitle>
+            <InputTitle>추가설명</InputTitle>
             <InputTextArea></InputTextArea>
           </InputContainer>
           <InputContainer>
-            <InputTitle>맞는 것만 선택하세요(추가 옵션)</InputTitle>
-            <InputCheckBox type="checkbox" id="elevator" name="elevator" />
-            <InputCheckBoxLabel for="elevator">엘레베이터</InputCheckBoxLabel>
-            <InputCheckBox type="checkbox" id="park" name="park" />
-            <InputCheckBoxLabel for="park">주차장</InputCheckBoxLabel>
-            <InputCheckBox type="checkbox" id="cctv" name="cctv" />
-            <InputCheckBoxLabel for="cctv">cctv</InputCheckBoxLabel>
-            <InputCheckBox type="checkbox" id="autoDoor" name="autoDoor" />
-            <InputCheckBoxLabel for="autoDoor">자동문</InputCheckBoxLabel>
-            <InputCheckBox
-              type="checkbox"
-              id="washingMachine"
-              name="washingMachine"
-            />
-            <InputCheckBoxLabel for="washingMachine">세탁기</InputCheckBoxLabel>
-            <InputCheckBox type="checkbox" id="gasrange" name="gasrange" />
-            <InputCheckBoxLabel for="gasrange">가스레인지</InputCheckBoxLabel>
-            <InputCheckBox
-              type="checkbox"
-              id="refrigerator"
-              name="refrigerator"
-            />
-            <InputCheckBoxLabel for="refrigerator">냉장고</InputCheckBoxLabel>
-            <InputCheckBox
-              type="checkbox"
-              id="airconditioner"
-              name="airconditioner"
-            />
-            <InputCheckBoxLabel for="airconditioner">에어컨</InputCheckBoxLabel>
+            <InputTitle>추가 옵션 (맞는 것만)</InputTitle>
+            <FlexContainer>
+              <InputCheckBox type="checkbox" id="elevator" name="elevator" />
+              <InputCheckBoxLabel for="elevator">엘레베이터</InputCheckBoxLabel>
+              <InputCheckBox type="checkbox" id="park" name="park" />
+              <InputCheckBoxLabel for="park">주차장</InputCheckBoxLabel>
+              <InputCheckBox type="checkbox" id="cctv" name="cctv" />
+              <InputCheckBoxLabel for="cctv">cctv</InputCheckBoxLabel>
+              <InputCheckBox type="checkbox" id="autoDoor" name="autoDoor" />
+              <InputCheckBoxLabel for="autoDoor">자동문</InputCheckBoxLabel>
+            </FlexContainer>
+            <FlexContainer>
+              <InputCheckBox
+                type="checkbox"
+                id="washingMachine"
+                name="washingMachine"
+              />
+              <InputCheckBoxLabel for="washingMachine">
+                세탁기
+              </InputCheckBoxLabel>
+              <InputCheckBox type="checkbox" id="gasrange" name="gasrange" />
+              <InputCheckBoxLabel for="gasrange">가스레인지</InputCheckBoxLabel>
+              <InputCheckBox
+                type="checkbox"
+                id="refrigerator"
+                name="refrigerator"
+              />
+              <InputCheckBoxLabel for="refrigerator">냉장고</InputCheckBoxLabel>
+              <InputCheckBox
+                type="checkbox"
+                id="airconditioner"
+                name="airconditioner"
+              />
+              <InputCheckBoxLabel for="airconditioner">
+                에어컨
+              </InputCheckBoxLabel>
+            </FlexContainer>
+          </InputContainer>
+
+          <InputContainer>
+            <InputTitle>주변시설(맞는 것만)</InputTitle>
+
+            <FlexContainer>
+              <InputCheckBox
+                type="checkbox"
+                id="busStation"
+                name="busStation"
+              />
+              <InputCheckBoxLabel for="busStation">
+                버스정류장
+              </InputCheckBoxLabel>
+              <InputCheckBox
+                type="checkbox"
+                id="subwayStation"
+                name="subwayStation"
+              />
+              <InputCheckBoxLabel for="subwayStation">
+                지하철역
+              </InputCheckBoxLabel>
+            </FlexContainer>
           </InputContainer>
           <InputContainer>
-            <InputTitle>맞는 것만 선택하세요(주변시설)</InputTitle>
-            <InputCheckBox type="checkbox" id="busStation" name="busStation" />
-            <InputCheckBoxLabel for="busStation">버스정류장</InputCheckBoxLabel>
-            <InputCheckBox
-              type="checkbox"
-              id="subwayStation"
-              name="subwayStation"
-            />
-            <InputCheckBoxLabel for="subwayStation">
-              지하철역
-            </InputCheckBoxLabel>
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>평면도 넣으세요(무조건 필요함)</InputTitle>
+            <InputTitle>평면도 넣으세요(필수)</InputTitle>
             <InputImage type="file"></InputImage>
           </InputContainer>
           <InputContainer>
-            <InputTitle>사진 넣으세요(무조건 필요함)</InputTitle>
+            <InputTitle>사진 넣으세요(필수)</InputTitle>
             <InputImage type="file"></InputImage>
           </InputContainer>
           <InputContainer>
-            <InputTitle>사진 넣으세요(여기서부터는 선택)</InputTitle>
+            <InputTitle>사진 넣으세요(선택)</InputTitle>
             <InputImage type="file"></InputImage>
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>사진 넣으세요</InputTitle>
             <InputImage type="file"></InputImage>
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>사진 넣으세요</InputTitle>
             <InputImage type="file"></InputImage>
-          </InputContainer>
-          <InputContainer>
-            <InputTitle>사진 넣으세요</InputTitle>
             <InputImage type="file"></InputImage>
           </InputContainer>
           <SubmitButton type="submit">제출하기</SubmitButton>
