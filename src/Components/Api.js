@@ -72,3 +72,25 @@ export const getRoomList = async univid => {
   const List = await allApi.get(`/roomdata/${univid}`);
   return List;
 };
+
+//판매자
+//판매자 매물 올리기
+
+export const postManagerRoom = async (body, pictureList, univid, history) => {
+  const sellerid = localStorage.getItem("userId");
+  const roomid = await allApi.post(`/manager/manageroom/${sellerid}`, body);
+  let PictureCount = 0;
+  await pictureList.map(async each => {
+    let fd = new FormData();
+    await fd.append("file", each);
+    const imageurl = await allApi.post(
+      `/manager/manageroom/uploadimg/${univid}/${
+        roomid.data
+      }/${pictureList.indexOf(each)}`,
+      fd
+    );
+    PictureCount = PictureCount + 1;
+    await allApi.post(`http://10.16.131.62:8080${imageurl.data}`);
+  });
+  await history.push("/manager");
+};

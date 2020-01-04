@@ -23,6 +23,8 @@ import Edit from "Route/User/Edit";
 import Secession from "Route/User/Secession";
 import Posts from "Route/User/Posts";
 import SellerHome from "Route/Seller/SellerHome";
+import SellerRoomList from "Route/Seller/SellerRoomList";
+import SellerRoomNew from "Route/Seller/SellerRoomNew/SellerRoomNew";
 
 export default () => {
   return (
@@ -56,6 +58,16 @@ export default () => {
         <Route path="/userinfo/posts/:userid" exact component={Posts} />
         {/* 방 판매자 */}
         <Route path="/manager" exact component={SellerHome} />
+        <Route
+          path="/manager/roomlist/:userid"
+          exact
+          component={SellerRoomList}
+        />
+        <Route
+          path="/manager/newroom/:userid"
+          exact
+          component={SellerRoomNew}
+        />
       </Switch>
     </Router>
   );
