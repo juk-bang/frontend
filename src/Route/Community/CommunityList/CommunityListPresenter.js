@@ -13,7 +13,7 @@ import { button } from "../../../Components/Style";
 
 const WriteButton = styled(Link)`
   ${button};
-`
+`;
 //메인 함수
 const ListPresenter = ({
   match: {
@@ -52,7 +52,10 @@ const ListPresenter = ({
       <Board>
         {localStorage.getItem("LoggedIn") == "true" ? (
           <>
-            <WriteButton backgroundColor={Color.mint} to={`/community/${univid}/new`}>
+            <WriteButton
+              backgroundColor={Color.mint}
+              to={`/community/${univid}/new`}
+            >
               글쓰기
             </WriteButton>
           </>
