@@ -4,18 +4,16 @@ import React, { useEffect, useState, useContext } from "react";
 import { withRouter, Link } from "react-router-dom";
 //Components
 import Header from "Components/Header";
-import { getCommunityList } from "Components/Api";
+import { getMyCommunityList } from "Components/Api";
 //style
 import { BoardList, BoardTitle, GotoDetail } from "./Style";
-import { Button, Board, Color } from "Components/Style";
+import { Board, Color } from "Components/Style";
 import MyPage from "../MyPage/MyPage";
 import { FlexContainer } from "../../../Components/Style";
 
 //메인 함수
 const Posts = ({
-  match: {
-    params: { univid }
-  }
+
 }) => {
   //state초기화
   //List = 게시글 리스트
@@ -25,7 +23,9 @@ const Posts = ({
 
   //리스트를 Api에서 불러오는 함수
   const getList = async () => {
-    const postsList = await getCommunityList(univid);
+    const userid = localStorage.getItem("userId");
+
+    const postsList = await getMyCommunityList(userid);
     const { data } = postsList;
     setList({ List: data });
     List.List = data;
@@ -46,19 +46,10 @@ const Posts = ({
   return (
     <div>
       <Header />
+      <FlexContainer  jstart>
       <MyPage></MyPage>
-      <FlexContainer jcenter astart>
-      <Board width = "60%">
-        {localStorage.getItem("LoggedIn") == "true" ? (
-          <>
-            <Link color={Color.mint} to={`/community/${univid}/new`}>
-              글쓰기
-            </Link>
-          </>
-        ) : (
-          ""
-        )}
 
+      <Board width = "80%">
         <BoardList>
           <BoardTitle>제목</BoardTitle>
           <BoardTitle>작성자</BoardTitle>

@@ -114,3 +114,11 @@ export const getAdminReportList = async univid => {
   const List = await allApi.get(`/admin/report/${univid}`);
   return List;
 };
+
+
+//마이페이지
+//커뮤니티 게시글 리스트 얻기
+export const getMyCommunityList = async userid => {
+  const List = await allApi.get(`/userinfo/posts/${userid}`);
+  return List;
+};
