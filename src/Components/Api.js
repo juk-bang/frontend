@@ -69,6 +69,6 @@ export const putCommunityComments = async (univid, postid, commentId, body) => {
 //방
 //방 리스트 얻기
 export const getRoomList = async univid => {
-  const List = await allApi.get(`/roomdata/${univid}`);
+  const List = await allApi.get(`/roomlist/${univid}`);
   return List;
 };
