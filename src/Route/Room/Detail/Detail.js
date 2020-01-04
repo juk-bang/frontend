@@ -14,11 +14,16 @@ import park from "img/park.png";
 import washingMachine from "img/washingMachine.png";
 import refrigerator from "img/refrigerator.png"
 
-import { IoIosHeart, IoIosArrowForward, IoIosArrowBack } from "react-icons/io";
-import { AiTwotoneAlert, AiFillWechat } from "react-icons/ai";
+import {Heart} from "styled-icons/boxicons-regular/Heart";
+ 
+import {ArrowBackIos} from "styled-icons/material/ArrowBackIos";
+import {ArrowForwardIos} from "styled-icons/material/ArrowForwardIos";
+
 import { Person } from "styled-icons/material/Person";
-import { MdMap } from "react-icons/md";
+// import { MdMap } from "react-icons/md";
 import {Wechat2} from "styled-icons/remix-fill/Wechat2";
+import {AddAlert} from "styled-icons/material/AddAlert";
+
 
 export const CFlexComponent = styled.div`
   width: 100%;
@@ -149,6 +154,7 @@ const ReviewScroll = styled.div`
   height: 400px;
   overflow: scroll;
 `;
+
 const ReviewComponent = styled.div`
   border: 1px solid pink;
   padding: 10px;
@@ -265,7 +271,7 @@ function Picture({ picture }) {
           if (current !== 0) setCurrent(current - 1);
         }}
       >
-        <IoIosArrowBack></IoIosArrowBack>
+      <ArrowBackIos></ArrowBackIos>
       </PictureButtonComponent>
       <PictureComponent current={current} length={length}>
         {picture.map((p, index) => (
@@ -279,7 +285,7 @@ function Picture({ picture }) {
           if (current !== length - 1) setCurrent(current + 1);
         }}
       >
-        <IoIosArrowForward></IoIosArrowForward>
+       <ArrowForwardIos></ArrowForwardIos>
       </PictureButtonComponent>
     </PictureBoxComponent>
   );
@@ -324,7 +330,7 @@ function Detail(props) {
       <FloorComponent id="floor"></FloorComponent>
       <div style={{ backgroundColor: "white", display: "flex" }}>
         <Floor onClick={floor}>
-          <MdMap></MdMap>
+          {/* <MdMap></MdMap> */}
         </Floor>
 
         <CFlexComponent style={{ width: "70%", marginTop: "20px" }}>
@@ -392,7 +398,7 @@ function Detail(props) {
                   <input placeholder="리뷰를 작성하세요"></input>
                 </CFlexComponent>
                 <ChattingButton>
-                  <AiFillWechat></AiFillWechat>
+                  <Wechat2></Wechat2>
                 </ChattingButton>
               </FlexComponent>
             </ReviewComponent>
@@ -410,11 +416,11 @@ function Detail(props) {
             <ButtonBar>
               <FlexComponent style={{ justifyContent: "space-around" }}>
                 <Button>
-                  <AiTwotoneAlert></AiTwotoneAlert>
+                  <AddAlert></AddAlert>
                 </Button>
                   <Button>{/*grade */}</Button>
                 <Button>
-                  <IoIosHeart></IoIosHeart>
+                 <Heart></Heart>
                 </Button>
               </FlexComponent>
             </ButtonBar>
@@ -435,8 +441,9 @@ function Detail(props) {
                 >
                   <h2>{/*sellerid*/}</h2>
                 </CFlexComponent>
-                <ChattingButton>
-                  <Wechat2></Wechat2>
+        
+                <ChattingButton >
+                 <Wechat2></Wechat2>
                 </ChattingButton>
               </FlexComponent>
    
